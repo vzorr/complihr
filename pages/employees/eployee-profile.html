@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Profile - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Back Button -->
+        <div class="mb-6">
+            <a href="/pages/employees/employees.html" class="inline-flex items-center text-sm text-gray-600 hover:text-gray-900">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Back to Employees
+            </a>
+        </div>
+
+        <!-- Profile Header -->
+        <div class="card mb-6">
+            <div class="flex items-start justify-between">
+                <div class="flex items-start space-x-6">
+                    <!-- Profile Photo -->
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" 
+                             alt="Employee" 
+                             class="w-32 h-32 rounded-full object-cover">
+                        <button class="absolute bottom-0 right-0 w-10 h-10 bg-primary-500 rounded-full flex items-center justify-center text-white hover:bg-primary-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Basic Info -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-2">
+                            <h1 class="text-2xl font-bold text-gray-900">Mark Williams</h1>
+                            <span class="badge badge-success">Active</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">HR Manager • Human Resources</p>
+                        
+                        <div class="grid grid-cols-3 gap-6">
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Employee ID</p>
+                                <p class="text-sm font-medium text-gray-900">EMP-001234</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Joining Date</p>
+                                <p class="text-sm font-medium text-gray-900">Jan 11, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 mb-1">Work Location</p>
+                                <p class="text-sm font-medium text-gray-900">New York Office</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button class="btn-secondary">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Send Email
+                    </button>
+                    <button class="btn-primary">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                        Edit Profile
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6" x-data="{ activeTab: 'overview' }">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button @click="activeTab = 'overview'" 
+                        :class="activeTab === 'overview' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Overview
+                </button>
+                <button @click="activeTab = 'personal'" 
+                        :class="activeTab === 'personal' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Personal Information
+                </button>
+                <button @click="activeTab = 'employment'" 
+                        :class="activeTab === 'employment' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Employment Details
+                </button>
+                <button @click="activeTab = 'documents'" 
+                        :class="activeTab === 'documents' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Documents
+                </button>
+                <button @click="activeTab = 'attendance'" 
+                        :class="activeTab === 'attendance' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Attendance
+                </button>
+                <button @click="activeTab = 'leave'" 
+                        :class="activeTab === 'leave' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Leave
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="mt-6">
+                
+                <!-- Overview Tab -->
+                <div x-show="activeTab === 'overview'" class="space-y-6">
+                    <!-- Quick Stats -->
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        <div class="card">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Days Present</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">248</p>
+                                </div>
+                                <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Days Absent</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">3</p>
+                                </div>
+                                <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Leave Balance</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">15</p>
+                                </div>
+                                <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Overtime Hours</p>
+                                    <p class="text-2xl font-bold text-gray-900 mt-1">24</p>
+                                </div>
+                                <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Activity</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-success-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Clocked In</p>
+                                    <p class="text-sm text-gray-600">Today at 09:00 AM</p>
+                                </div>
+                                <span class="text-xs text-gray-500">2 hours ago</span>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Leave Request Approved</p>
+                                    <p class="text-sm text-gray-600">Annual leave from Dec 20-25</p>
+                                </div>
+                                <span class="text-xs text-gray-500">1 day ago</span>
+                            </div>
+
+                            <div class="flex items-start">
+                                <div class="w-10 h-10 bg-warning-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-5 h-5 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                </div>
+                                <div class="ml-4 flex-1">
+                                    <p class="text-sm font-medium text-gray-900">Document Uploaded</p>
+                                    <p class="text-sm text-gray-600">Training certificate added</p>
+                                </div>
+                                <span class="text-xs text-gray-500">3 days ago</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Schedule -->
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Upcoming Schedule</h3>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="text-center mr-4">
+                                        <p class="text-xs text-gray-500">MON</p>
+                                        <p class="text-lg font-bold text-gray-900">04</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Morning Shift</p>
+                                        <p class="text-xs text-gray-600">08:00 AM - 05:00 PM</p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Scheduled</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="text-center mr-4">
+                                        <p class="text-xs text-gray-500">TUE</p>
+                                        <p class="text-lg font-bold text-gray-900">05</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Morning Shift</p>
+                                        <p class="text-xs text-gray-600">08:00 AM - 05:00 PM</p>
+                                    </div>
+                                </div>
+                                <span class="badge badge-success">Scheduled</span>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="text-center mr-4">
+                                        <p class="text-xs text-gray-500">WED</p>
+                                        <p class="text-lg font-bold text-gray-900">06</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Day Off</p>
+                                        <p class="text-xs text-gray-600">No shift scheduled</p>
+                                    </div>
+                                </div>
+                                <span class="badge bg-gray-100 text-gray-600">Off</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Information Tab -->
+                <div x-show="activeTab === 'personal'" class="space-y-6">
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Basic Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Full Name</p>
+                                <p class="text-sm font-medium text-gray-900">Mark Williams</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Date of Birth</p>
+                                <p class="text-sm font-medium text-gray-900">January 15, 1990</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Gender</p>
+                                <p class="text-sm font-medium text-gray-900">Male</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Nationality</p>
+                                <p class="text-sm font-medium text-gray-900">American</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">National ID / SSN</p>
+                                <p class="text-sm font-medium text-gray-900">***-**-4567</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Marital Status</p>
+                                <p class="text-sm font-medium text-gray-900">Married</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Email</p>
+                                <p class="text-sm font-medium text-gray-900">mark.williams@complihr.com</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Phone Number</p>
+                                <p class="text-sm font-medium text-gray-900">+1 (555) 123-4567</p>
+                            </div>
+                            <div class="md:col-span-2">
+                                <p class="text-sm text-gray-600 mb-1">Address</p>
+                                <p class="text-sm font-medium text-gray-900">123 Main Street, New York, NY 10001, United States</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Contact Name</p>
+                                <p class="text-sm font-medium text-gray-900">Sarah Williams</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Relationship</p>
+                                <p class="text-sm font-medium text-gray-900">Spouse</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Phone Number</p>
+                                <p class="text-sm font-medium text-gray-900">+1 (555) 987-6543</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Email</p>
+                                <p class="text-sm font-medium text-gray-900">sarah.williams@email.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employment Details Tab -->
+                <div x-show="activeTab === 'employment'" class="space-y-6">
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Position Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Employee ID</p>
+                                <p class="text-sm font-medium text-gray-900">EMP-001234</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Joining Date</p>
+                                <p class="text-sm font-medium text-gray-900">January 11, 2023</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Department</p>
+                                <p class="text-sm font-medium text-gray-900">Human Resources</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Designation</p>
+                                <p class="text-sm font-medium text-gray-900">HR Manager</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Employment Type</p>
+                                <p class="text-sm font-medium text-gray-900">Full-Time</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Work Location</p>
+                                <p class="text-sm font-medium text-gray-900">Office</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Reports To</p>
+                                <p class="text-sm font-medium text-gray-900">Robert Allen (CEO)</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Employment Status</p>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Compensation</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Basic Salary</p>
+                                <p class="text-sm font-medium text-gray-900">$85,000</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Salary Frequency</p>
+                                <p class="text-sm font-medium text-gray-900">Monthly</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Currency</p>
+                                <p class="text-sm font-medium text-gray-900">USD</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Last Salary Review</p>
+                                <p class="text-sm font-medium text-gray-900">January 1, 2024</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Bank Details</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Bank Name</p>
+                                <p class="text-sm font-medium text-gray-900">Chase Bank</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Account Number</p>
+                                <p class="text-sm font-medium text-gray-900">******* 4567</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Routing Number</p>
+                                <p class="text-sm font-medium text-gray-900">******789</p>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 mb-1">Account Type</p>
+                                <p class="text-sm font-medium text-gray-900">Checking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents Tab -->
+                <div x-show="activeTab === 'documents'" class="space-y-6">
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Employee Documents</h3>
+                            <button class="btn-primary btn-sm">
+                                <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                </svg>
+                                Upload Document
+                            </button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-error-100 rounded-lg flex items-center justify-center mr-3">
+                                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Resume.pdf</p>
+                                        <p class="text-xs text-gray-500">Uploaded on Jan 10, 2023 • 245 KB</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-error-600 hover:text-error-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3">
+                                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Employment_Contract.pdf</p>
+                                        <p class="text-xs text-gray-500">Uploaded on Jan 10, 2023 • 1.2 MB</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-error-600 hover:text-error-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center mr-3">
+                                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">Training_Certificate.pdf</p>
+                                        <p class="text-xs text-gray-500">Uploaded on Oct 15, 2024 • 567 KB</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <button class="text-primary-600 hover:text-primary-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                    </button>
+                                    <button class="text-error-600 hover:text-error-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attendance Tab -->
+                <div x-show="activeTab === 'attendance'">
+                    <div class="card">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Attendance History</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="table-header">Date</th>
+                                        <th class="table-header">Check In</th>
+                                        <th class="table-header">Check Out</th>
+                                        <th class="table-header">Working Hours</th>
+                                        <th class="table-header">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="table-row">
+                                        <td class="table-cell">Nov 03, 2025</td>
+                                        <td class="table-cell">09:00 AM</td>
+                                        <td class="table-cell">05:00 PM</td>
+                                        <td class="table-cell">8h 0m</td>
+                                        <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Nov 02, 2025</td>
+                                        <td class="table-cell">09:15 AM</td>
+                                        <td class="table-cell">05:30 PM</td>
+                                        <td class="table-cell">8h 15m</td>
+                                        <td class="table-cell"><span class="badge badge-late">Late</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Nov 01, 2025</td>
+                                        <td class="table-cell">09:00 AM</td>
+                                        <td class="table-cell">05:00 PM</td>
+                                        <td class="table-cell">8h 0m</td>
+                                        <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Oct 31, 2025</td>
+                                        <td class="table-cell">-</td>
+                                        <td class="table-cell">-</td>
+                                        <td class="table-cell">0h 0m</td>
+                                        <td class="table-cell"><span class="badge badge-absent">Absent</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Oct 30, 2025</td>
+                                        <td class="table-cell">09:00 AM</td>
+                                        <td class="table-cell">06:00 PM</td>
+                                        <td class="table-cell">9h 0m</td>
+                                        <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leave Tab -->
+                <div x-show="activeTab === 'leave'">
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-lg font-semibold text-gray-900">Leave Balance</h3>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                            <div class="card bg-primary-50">
+                                <p class="text-sm text-primary-700 mb-1">Annual Leave</p>
+                                <p class="text-3xl font-bold text-primary-900">15 <span class="text-sm font-normal">days</span></p>
+                                <p class="text-xs text-primary-600 mt-2">Out of 25 days</p>
+                            </div>
+
+                            <div class="card bg-warning-50">
+                                <p class="text-sm text-warning-700 mb-1">Sick Leave</p>
+                                <p class="text-3xl font-bold text-warning-900">8 <span class="text-sm font-normal">days</span></p>
+                                <p class="text-xs text-warning-600 mt-2">Out of 10 days</p>
+                            </div>
+
+                            <div class="card bg-success-50">
+                                <p class="text-sm text-success-700 mb-1">Casual Leave</p>
+                                <p class="text-3xl font-bold text-success-900">5 <span class="text-sm font-normal">days</span></p>
+                                <p class="text-xs text-success-600 mt-2">Out of 7 days</p>
+                            </div>
+                        </div>
+
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Leave History</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="table-header">Leave Type</th>
+                                        <th class="table-header">Start Date</th>
+                                        <th class="table-header">End Date</th>
+                                        <th class="table-header">Days</th>
+                                        <th class="table-header">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr class="table-row">
+                                        <td class="table-cell">Annual Leave</td>
+                                        <td class="table-cell">Dec 20, 2025</td>
+                                        <td class="table-cell">Dec 25, 2025</td>
+                                        <td class="table-cell">5</td>
+                                        <td class="table-cell"><span class="badge badge-approved">Approved</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Sick Leave</td>
+                                        <td class="table-cell">Oct 10, 2025</td>
+                                        <td class="table-cell">Oct 12, 2025</td>
+                                        <td class="table-cell">2</td>
+                                        <td class="table-cell"><span class="badge badge-approved">Approved</span></td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="table-cell">Casual Leave</td>
+                                        <td class="table-cell">Sep 05, 2025</td>
+                                        <td class="table-cell">Sep 06, 2025</td>
+                                        <td class="table-cell">2</td>
+                                        <td class="table-cell"><span class="badge badge-approved">Approved</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+</body>
+</html>

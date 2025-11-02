@@ -15,6 +15,9 @@
     <!-- Header -->
     <div id="header-container"></div>
 
+    <!-- Employee Add/Edit Modal -->
+    <div id="employee-modal-container"></div>
+
     <!-- Main Content -->
     <main class="ml-64 pt-16 p-8" x-data="{ showDetail: false, selectedEmployee: null }">
         <div class="flex items-center justify-between mb-6">
@@ -25,7 +28,7 @@
                     <button class="text-sm font-medium text-gray-600 pb-2 hover:text-gray-900">Organizational Structure</button>
                 </div>
             </div>
-            <button class="btn-primary">
+            <button @click="$dispatch('employee-modal', { open: true, mode: 'add' })" class="btn-primary">
                 <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
@@ -70,10 +73,11 @@
                                     <th class="table-header">Department</th>
                                     <th class="table-header">Type</th>
                                     <th class="table-header">Status</th>
+                                    <th class="table-header">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Mark Williams'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -83,8 +87,28 @@
                                     <td class="table-cell">HR</td>
                                     <td class="table-cell">Office</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Mark Williams'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Floyd Miles'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -94,8 +118,28 @@
                                     <td class="table-cell">IT</td>
                                     <td class="table-cell">Office</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Floyd Miles'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Cody Fisher'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -105,8 +149,28 @@
                                     <td class="table-cell">Sales</td>
                                     <td class="table-cell">Office</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Cody Fisher'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Dianne Russell'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -116,8 +180,28 @@
                                     <td class="table-cell">Sales</td>
                                     <td class="table-cell">Remote</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Dianne Russell'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Savannah Nguyen'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Savannah+Nguyen&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -127,8 +211,28 @@
                                     <td class="table-cell">Design</td>
                                     <td class="table-cell">Office</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Savannah Nguyen'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
                                 </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Jacob Jones'">
+                                <tr class="table-row">
                                     <td class="table-cell">
                                         <div class="flex items-center">
                                             <img src="https://ui-avatars.com/api/?name=Jacob+Jones&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
@@ -138,50 +242,26 @@
                                     <td class="table-cell">IT</td>
                                     <td class="table-cell">Remote</td>
                                     <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
-                                </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Marvin McKinney'">
                                     <td class="table-cell">
-                                        <div class="flex items-center">
-                                            <img src="https://ui-avatars.com/api/?name=Marvin+McKinney&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
-                                            <span class="font-medium">Marvin McKinney</span>
+                                        <div class="flex items-center space-x-2">
+                                            <button @click="showDetail = true; selectedEmployee = 'Jacob Jones'" class="text-primary-600 hover:text-primary-700" title="View Details">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                                </svg>
+                                            </button>
+                                            <button @click="$dispatch('employee-modal', { open: true, mode: 'edit', employee: {} })" class="text-gray-600 hover:text-gray-700" title="Edit">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="text-error-600 hover:text-error-700" title="Delete">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                </svg>
+                                            </button>
                                         </div>
                                     </td>
-                                    <td class="table-cell">Development</td>
-                                    <td class="table-cell">Remote</td>
-                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
-                                </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Brooklyn Simmons'">
-                                    <td class="table-cell">
-                                        <div class="flex items-center">
-                                            <img src="https://ui-avatars.com/api/?name=Brooklyn+Simmons&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
-                                            <span class="font-medium">Brooklyn Simmons</span>
-                                        </div>
-                                    </td>
-                                    <td class="table-cell">PM</td>
-                                    <td class="table-cell">Office</td>
-                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
-                                </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Kristin Watson'">
-                                    <td class="table-cell">
-                                        <div class="flex items-center">
-                                            <img src="https://ui-avatars.com/api/?name=Kristin+Watson&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
-                                            <span class="font-medium">Kristin Watson</span>
-                                        </div>
-                                    </td>
-                                    <td class="table-cell">HR</td>
-                                    <td class="table-cell">Office</td>
-                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
-                                </tr>
-                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Kathryn Murphy'">
-                                    <td class="table-cell">
-                                        <div class="flex items-center">
-                                            <img src="https://ui-avatars.com/api/?name=Kathryn+Murphy&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
-                                            <span class="font-medium">Kathryn Murphy</span>
-                                        </div>
-                                    </td>
-                                    <td class="table-cell">Development</td>
-                                    <td class="table-cell">Office</td>
-                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -189,7 +269,7 @@
 
                     <!-- Pagination -->
                     <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
-                        <p class="text-sm text-gray-600">Showing 1 to 20 out of 30 results</p>
+                        <p class="text-sm text-gray-600">Showing 1 to 6 out of 30 results</p>
                         <div class="flex items-center space-x-2">
                             <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -317,7 +397,7 @@
 
                     <!-- Action Button -->
                     <div class="pt-4 border-t border-gray-200">
-                        <button class="btn-primary w-full">See Full Profile</button>
+                        <a href="/pages/employees/employee-profile.html" class="btn-primary w-full">See Full Profile</a>
                     </div>
                 </div>
             </div>
@@ -326,5 +406,20 @@
 
     <!-- Scripts -->
     <script src="/js/main.js"></script>
+    <script>
+        // Load employee modal
+        document.addEventListener('DOMContentLoaded', async () => {
+            const modalContainer = document.getElementById('employee-modal-container');
+            if (modalContainer) {
+                try {
+                    const response = await fetch('/modals/employee-add-edit.html');
+                    const html = await response.text();
+                    modalContainer.innerHTML = html;
+                } catch (error) {
+                    console.error('Error loading employee modal:', error);
+                }
+            }
+        });
+    </script>
 </body>
 </html>

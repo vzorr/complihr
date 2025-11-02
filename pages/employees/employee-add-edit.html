@@ -1,0 +1,449 @@
+<!-- Employee Add/Edit Modal -->
+<div x-data="{ open: false, mode: 'add', employee: {} }" @employee-modal.window="open = $event.detail.open; mode = $event.detail.mode || 'add'; employee = $event.detail.employee || {}">
+  <!-- Modal Overlay -->
+  <div x-show="open" 
+       x-transition:enter="transition ease-out duration-300"
+       x-transition:enter-start="opacity-0"
+       x-transition:enter-end="opacity-100"
+       x-transition:leave="transition ease-in duration-200"
+       x-transition:leave-start="opacity-100"
+       x-transition:leave-end="opacity-0"
+       class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
+       style="display: none;">
+    
+    <!-- Modal Content -->
+    <div @click.away="open = false"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform scale-100"
+         x-transition:leave-end="opacity-0 transform scale-95"
+         class="bg-white rounded-lg shadow-lg w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+        <h2 class="text-xl font-semibold text-gray-900" x-text="mode === 'add' ? 'Add New Employee' : 'Edit Employee'"></h2>
+        <button @click="open = false" class="text-gray-400 hover:text-gray-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="flex-1 overflow-y-auto px-6 py-6">
+        <form id="employeeForm" class="space-y-6">
+          
+          <!-- Personal Information Section -->
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- First Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  First Name <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.firstName"
+                       required
+                       placeholder="Enter first name"
+                       class="form-input">
+              </div>
+
+              <!-- Last Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Last Name <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.lastName"
+                       required
+                       placeholder="Enter last name"
+                       class="form-input">
+              </div>
+
+              <!-- Email -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Email <span class="text-error-500">*</span>
+                </label>
+                <input type="email" 
+                       x-model="employee.email"
+                       required
+                       placeholder="employee@company.com"
+                       class="form-input">
+              </div>
+
+              <!-- Phone -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number <span class="text-error-500">*</span>
+                </label>
+                <input type="tel" 
+                       x-model="employee.phone"
+                       required
+                       placeholder="+1 (555) 123-4567"
+                       class="form-input">
+              </div>
+
+              <!-- Date of Birth -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Date of Birth <span class="text-error-500">*</span>
+                </label>
+                <input type="date" 
+                       x-model="employee.dateOfBirth"
+                       required
+                       class="form-input">
+              </div>
+
+              <!-- Gender -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Gender <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.gender" required class="form-input">
+                  <option value="">Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              </div>
+
+              <!-- Nationality -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Nationality
+                </label>
+                <input type="text" 
+                       x-model="employee.nationality"
+                       placeholder="Enter nationality"
+                       class="form-input">
+              </div>
+
+              <!-- National ID -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  National ID / SSN
+                </label>
+                <input type="text" 
+                       x-model="employee.nationalId"
+                       placeholder="Enter ID number"
+                       class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Address Information Section -->
+          <div class="pt-6 border-t border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Address Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Street Address -->
+              <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Street Address <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.streetAddress"
+                       required
+                       placeholder="Enter street address"
+                       class="form-input">
+              </div>
+
+              <!-- City -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  City <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.city"
+                       required
+                       placeholder="Enter city"
+                       class="form-input">
+              </div>
+
+              <!-- State/Province -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  State/Province <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.state"
+                       required
+                       placeholder="Enter state"
+                       class="form-input">
+              </div>
+
+              <!-- Postal Code -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Postal Code <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.postalCode"
+                       required
+                       placeholder="Enter postal code"
+                       class="form-input">
+              </div>
+
+              <!-- Country -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Country <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.country" required class="form-input">
+                  <option value="">Select country</option>
+                  <option value="US">United States</option>
+                  <option value="UK">United Kingdom</option>
+                  <option value="CA">Canada</option>
+                  <option value="AU">Australia</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Employment Details Section -->
+          <div class="pt-6 border-t border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Employment Details</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Employee ID -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Employee ID <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.employeeId"
+                       required
+                       placeholder="EMP-001234"
+                       class="form-input">
+              </div>
+
+              <!-- Joining Date -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Joining Date <span class="text-error-500">*</span>
+                </label>
+                <input type="date" 
+                       x-model="employee.joiningDate"
+                       required
+                       class="form-input">
+              </div>
+
+              <!-- Department -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Department <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.department" required class="form-input">
+                  <option value="">Select department</option>
+                  <option value="HR">Human Resources</option>
+                  <option value="IT">Information Technology</option>
+                  <option value="Sales">Sales</option>
+                  <option value="Marketing">Marketing</option>
+                  <option value="Finance">Finance</option>
+                  <option value="Operations">Operations</option>
+                </select>
+              </div>
+
+              <!-- Designation/Role -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Designation <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.designation"
+                       required
+                       placeholder="e.g., Senior Manager"
+                       class="form-input">
+              </div>
+
+              <!-- Employment Type -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Employment Type <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.employmentType" required class="form-input">
+                  <option value="">Select type</option>
+                  <option value="full-time">Full-Time</option>
+                  <option value="part-time">Part-Time</option>
+                  <option value="contract">Contract</option>
+                  <option value="intern">Intern</option>
+                </select>
+              </div>
+
+              <!-- Work Location -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Work Location <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.workLocation" required class="form-input">
+                  <option value="">Select location</option>
+                  <option value="office">Office</option>
+                  <option value="remote">Remote</option>
+                  <option value="hybrid">Hybrid</option>
+                </select>
+              </div>
+
+              <!-- Reports To -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Reports To
+                </label>
+                <select x-model="employee.reportsTo" class="form-input">
+                  <option value="">Select manager</option>
+                  <option value="1">Robert Allen</option>
+                  <option value="2">Sarah Johnson</option>
+                  <option value="3">Michael Chen</option>
+                </select>
+              </div>
+
+              <!-- Employment Status -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Employment Status <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.status" required class="form-input">
+                  <option value="">Select status</option>
+                  <option value="active">Active</option>
+                  <option value="probation">Probation</option>
+                  <option value="notice">Notice Period</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Salary Information Section -->
+          <div class="pt-6 border-t border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Salary Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Basic Salary -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Basic Salary <span class="text-error-500">*</span>
+                </label>
+                <div class="relative">
+                  <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500">$</span>
+                  <input type="number" 
+                         x-model="employee.basicSalary"
+                         required
+                         placeholder="0.00"
+                         class="form-input pl-7">
+                </div>
+              </div>
+
+              <!-- Salary Frequency -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Salary Frequency <span class="text-error-500">*</span>
+                </label>
+                <select x-model="employee.salaryFrequency" required class="form-input">
+                  <option value="">Select frequency</option>
+                  <option value="monthly">Monthly</option>
+                  <option value="bi-weekly">Bi-Weekly</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="hourly">Hourly</option>
+                </select>
+              </div>
+
+              <!-- Bank Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Bank Name
+                </label>
+                <input type="text" 
+                       x-model="employee.bankName"
+                       placeholder="Enter bank name"
+                       class="form-input">
+              </div>
+
+              <!-- Account Number -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Account Number
+                </label>
+                <input type="text" 
+                       x-model="employee.accountNumber"
+                       placeholder="Enter account number"
+                       class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergency Contact Section -->
+          <div class="pt-6 border-t border-gray-200">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              
+              <!-- Contact Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Contact Name <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.emergencyContactName"
+                       required
+                       placeholder="Enter contact name"
+                       class="form-input">
+              </div>
+
+              <!-- Relationship -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Relationship <span class="text-error-500">*</span>
+                </label>
+                <input type="text" 
+                       x-model="employee.emergencyContactRelationship"
+                       required
+                       placeholder="e.g., Spouse, Parent"
+                       class="form-input">
+              </div>
+
+              <!-- Contact Phone -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Contact Phone <span class="text-error-500">*</span>
+                </label>
+                <input type="tel" 
+                       x-model="employee.emergencyContactPhone"
+                       required
+                       placeholder="+1 (555) 123-4567"
+                       class="form-input">
+              </div>
+
+              <!-- Contact Email -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                  Contact Email
+                </label>
+                <input type="email" 
+                       x-model="employee.emergencyContactEmail"
+                       placeholder="contact@email.com"
+                       class="form-input">
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 border-t border-gray-200 flex items-center justify-end space-x-3">
+        <button @click="open = false" class="btn-secondary">
+          Cancel
+        </button>
+        <button type="submit" form="employeeForm" class="btn-primary">
+          <span x-text="mode === 'add' ? 'Add Employee' : 'Update Employee'"></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
