@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Settings - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+            <p class="text-sm text-gray-600">Manage your dashboard here</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">General</button>
+                <button class="px-4 py-3 text-sm font-medium text-primary-600 border-b-2 border-primary-600">Employee Settings</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Company Structure</button>
+            </div>
+        </div>
+
+        <!-- Sub Tabs -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-2">
+                <button class="px-4 py-2 bg-primary-50 text-primary-600 rounded-lg text-sm font-medium">Form Fields</button>
+                <button class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg text-sm font-medium">General</button>
+            </div>
+        </div>
+
+        <!-- Employee Settings Content -->
+        <div class="card max-w-4xl mb-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-6">Add New Employee Form Fields</h2>
+            <p class="text-sm text-gray-600 mb-6">Configure which fields appear in the "Add New Employee" form and their properties.</p>
+
+            <!-- Add New Section Button -->
+            <button class="btn-primary mb-6">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add New Section
+            </button>
+
+            <!-- Field Name Input -->
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-2">Field Name</label>
+                <input type="text" placeholder="e.g. Emergency Contact Reference" class="form-input" value="">
+            </div>
+
+            <h3 class="text-base font-semibold text-gray-900 mb-4">Form Section & Fields</h3>
+        </div>
+
+        <!-- Form Sections -->
+        <div class="space-y-4 max-w-4xl">
+            <!-- Information Section -->
+            <div class="card" x-data="{ open: true }">
+                <button @click="open = !open" class="w-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" :class="{ 'transform rotate-90': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-gray-900">Information</h4>
+                            <p class="text-sm text-gray-500">5 enabled, 3 required</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle-switch active">
+                            <span class="sr-only">Enabled</span>
+                        </label>
+                        <button class="text-error-600 hover:text-error-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </button>
+
+                <div x-show="open" class="mt-4 space-y-2">
+                    <!-- Field Item -->
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">First Name</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Last Name</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Email</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Address Section -->
+            <div class="card" x-data="{ open: true }">
+                <button @click="open = !open" class="w-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" :class="{ 'transform rotate-90': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-gray-900">Address</h4>
+                            <p class="text-sm text-gray-500">4 enabled, 3 required</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle-switch active">
+                            <span class="sr-only">Enabled</span>
+                        </label>
+                        <button class="text-error-600 hover:text-error-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </button>
+
+                <div x-show="open" class="mt-4 space-y-2">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Street Address</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">City</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payroll Section -->
+            <div class="card" x-data="{ open: true }">
+                <button @click="open = !open" class="w-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" :class="{ 'transform rotate-90': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-gray-900">Payroll</h4>
+                            <p class="text-sm text-gray-500">4 enabled, 3 required</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle-switch active">
+                            <span class="sr-only">Enabled</span>
+                        </label>
+                        <button class="text-error-600 hover:text-error-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </button>
+
+                <div x-show="open" class="mt-4 space-y-2">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Bank Name</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Optional</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Account Number</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Documents Section -->
+            <div class="card" x-data="{ open: true }">
+                <button @click="open = !open" class="w-full flex items-center justify-between">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-gray-400 mr-3" :class="{ 'transform rotate-90': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                        <div class="text-left">
+                            <h4 class="font-semibold text-gray-900">Documents</h4>
+                            <p class="text-sm text-gray-500">3 enabled, 2 required</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <label class="toggle-switch active">
+                            <span class="sr-only">Enabled</span>
+                        </label>
+                        <button class="text-error-600 hover:text-error-700">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </button>
+
+                <div x-show="open" class="mt-4 space-y-2">
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">ID Document</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 text-gray-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                            <span class="text-sm font-medium text-gray-700">Contract</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs text-gray-500">Required</span>
+                            <label class="toggle-switch active">
+                                <span class="sr-only">Enabled</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Save Button -->
+        <div class="flex items-center justify-end mt-8 max-w-4xl">
+            <button class="btn-primary">Save Changes</button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

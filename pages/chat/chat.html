@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat & Messaging - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 h-screen flex">
+        <!-- Chat Sidebar -->
+        <div class="w-80 bg-white border-r border-gray-200 flex flex-col">
+            <!-- Chat Header -->
+            <div class="p-4 border-b border-gray-200">
+                <h1 class="text-xl font-bold text-gray-900 mb-4">Chat & Messaging</h1>
+                <p class="text-sm text-gray-600 mb-4">Manage your chats here</p>
+                
+                <!-- Add Button -->
+                <button class="w-full btn-primary mb-4">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Add
+                </button>
+
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input type="search" 
+                           placeholder="Search by name, group chat, threads/bookmarks" 
+                           class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm">
+                </div>
+
+                <!-- Filter and Status -->
+                <div class="flex items-center justify-between">
+                    <button class="text-sm text-gray-600 hover:text-gray-900 flex items-center">
+                        Filter
+                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                        </svg>
+                    </button>
+                    <select class="text-sm border-gray-300 rounded-lg focus:ring-primary-500 focus:border-primary-500">
+                        <option>All Status</option>
+                        <option>Available</option>
+                        <option>Busy</option>
+                        <option>Away</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Chat Tabs -->
+            <div class="flex items-center border-b border-gray-200 px-4">
+                <button class="flex items-center px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                    Group chats
+                </button>
+            </div>
+
+            <!-- Chat List -->
+            <div class="flex-1 overflow-y-auto">
+                <!-- Group Chats Section -->
+                <div class="p-2">
+                    <!-- HR Announcement -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="flex items-center space-x-2 mr-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">HR Announcement</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Welcome to Compa...</p>
+                        </div>
+                    </div>
+
+                    <!-- Design Team -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="flex items-center space-x-2 mr-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Design Team</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Good morning team! L...</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-success-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                <svg class="w-3 h-3 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dev Team -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="flex items-center space-x-2 mr-3">
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Dev Team</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Alex, can you provide...</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pinned Messages Section -->
+                <div class="px-4 py-2">
+                    <div class="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                        </svg>
+                        <span>Pinned messages</span>
+                    </div>
+                </div>
+
+                <!-- Direct Messages -->
+                <div class="p-2">
+                    <!-- Floyd Miles - Active -->
+                    <div class="flex items-center p-3 bg-primary-50 border-l-4 border-primary-500 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=6366f1&color=fff" alt="Floyd Miles" class="w-10 h-10 rounded-full">
+                            <div class="absolute bottom-0 right-0 w-3 h-3 bg-success-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Floyd Miles</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-sm text-primary-600 font-medium">Good Morning ma'am</p>
+                            <p class="text-xs text-gray-600 mt-1">13:17 AM</p>
+                        </div>
+                    </div>
+
+                    <!-- Mark Williams -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=10b981&color=fff" alt="Mark Williams" class="w-10 h-10 rounded-full">
+                            <div class="absolute bottom-0 right-0 w-3 h-3 bg-success-500 border-2 border-white rounded-full"></div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Mark Williams</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                        </div>
+                        <span class="ml-2 bg-primary-500 text-white text-xs font-medium rounded-full w-5 h-5 flex items-center justify-center">2</span>
+                    </div>
+
+                    <!-- Cody Fisher -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="Cody Fisher" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Cody Fisher</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Hi, how are you today?</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- More contacts -->
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="Dianne" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Dianne</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Jacob+Jones&background=10b981&color=fff" alt="Jacob" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Jacob</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Kristin+Watson&background=f59e0b&color=fff" alt="Kristin" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Kristin</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                            <div class="flex items-center mt-1">
+                                <svg class="w-3 h-3 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- All messages section -->
+                <div class="px-4 py-2">
+                    <div class="flex items-center space-x-2 text-xs text-gray-500 mb-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        <span>All messages</span>
+                    </div>
+                </div>
+
+                <!-- Additional contacts -->
+                <div class="p-2">
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Adam+Smith&background=6366f1&color=fff" alt="Adam" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Adam</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg cursor-pointer">
+                        <div class="relative mr-3">
+                            <img src="https://ui-avatars.com/api/?name=Rose+Taylor&background=10b981&color=fff" alt="Rose" class="w-10 h-10 rounded-full">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between mb-1">
+                                <p class="text-sm font-medium text-gray-900">Rose</p>
+                                <span class="text-xs text-gray-500">13:17 AM</span>
+                            </div>
+                            <p class="text-xs text-gray-500 truncate">Sure, I'll get them to yo...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Content Area -->
+        <div class="flex-1 flex flex-col bg-white">
+            <!-- Chat Header -->
+            <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                <div class="flex items-center">
+                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=6366f1&color=fff" alt="Floyd Miles" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <h2 class="font-semibold text-gray-900">Floyd Miles</h2>
+                        <p class="text-xs text-success-600">Available</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+                        </svg>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                        </svg>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Messages Area -->
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Received Message -->
+                <div class="flex items-start">
+                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=6366f1&color=fff" alt="Floyd Miles" class="w-8 h-8 rounded-full mr-3">
+                    <div class="flex-1">
+                        <div class="flex items-center mb-1">
+                            <span class="font-medium text-sm text-gray-900 mr-2">Floyd Miles</span>
+                            <span class="text-xs text-gray-500">13:17 AM</span>
+                        </div>
+                        <div class="bg-gray-100 rounded-lg rounded-tl-none p-3 max-w-md">
+                            <p class="text-sm text-gray-900">Good Morning, I'll need those reports by 3 PM, please.</p>
+                        </div>
+                        <div class="mt-1 text-xs text-gray-500">13:17 AM</div>
+                    </div>
+                </div>
+
+                <!-- Sent Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex flex-col items-end">
+                        <div class="bg-primary-500 rounded-lg rounded-tr-none p-3 max-w-md">
+                            <p class="text-sm text-white">Sure, I'll get them to you on time</p>
+                        </div>
+                        <div class="mt-1 flex items-center">
+                            <span class="text-xs text-gray-500 mr-1">13:17 AM</span>
+                            <svg class="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Received Message -->
+                <div class="flex items-start">
+                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=6366f1&color=fff" alt="Floyd Miles" class="w-8 h-8 rounded-full mr-3">
+                    <div class="flex-1">
+                        <div class="bg-gray-100 rounded-lg rounded-tl-none p-3 max-w-md">
+                            <p class="text-sm text-gray-900">Also I hope you had a chance to review the project updates I sent last Friday.</p>
+                        </div>
+                        <div class="mt-1 text-xs text-gray-500">13:17 AM</div>
+                    </div>
+                </div>
+
+                <!-- Sent Message -->
+                <div class="flex items-start justify-end">
+                    <div class="flex-1 flex flex-col items-end">
+                        <div class="bg-primary-500 rounded-lg rounded-tr-none p-3 max-w-md">
+                            <p class="text-sm text-white">Yes, I've seen the project updates. I'll have them ready before the general meeting today.</p>
+                        </div>
+                        <div class="mt-1 flex items-center">
+                            <span class="text-xs text-gray-500 mr-1">13:17 AM</span>
+                            <svg class="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <svg class="w-4 h-4 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Received Message -->
+                <div class="flex items-start">
+                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=6366f1&color=fff" alt="Floyd Miles" class="w-8 h-8 rounded-full mr-3">
+                    <div class="flex-1">
+                        <div class="bg-gray-100 rounded-lg rounded-tl-none p-3 max-w-md">
+                            <p class="text-sm text-gray-900">Can we schedule a meeting for tomorrow?</p>
+                        </div>
+                        <div class="mt-1 text-xs text-gray-500">13:17 AM</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
+                        </svg>
+                    </button>
+                    <input type="text" placeholder="Type your message here..." class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>
+                        </svg>
+                    </button>
+                    <button class="p-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

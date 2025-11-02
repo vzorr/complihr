@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Employees - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8" x-data="{ showDetail: false, selectedEmployee: null }">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">All Employees</h1>
+                <div class="flex items-center space-x-4 mt-2">
+                    <button class="text-sm font-medium text-primary-600 border-b-2 border-primary-600 pb-2">Employees</button>
+                    <button class="text-sm font-medium text-gray-600 pb-2 hover:text-gray-900">Organizational Structure</button>
+                </div>
+            </div>
+            <button class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add New Employee
+            </button>
+        </div>
+
+        <!-- Filters and Search -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex-1 mr-4">
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" 
+                               placeholder="Search by name, role, department..." 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent sm:text-sm">
+                    </div>
+                </div>
+                <button class="btn-secondary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+                    </svg>
+                    Filter
+                </button>
+            </div>
+        </div>
+
+        <!-- Employee Table with Detail Panel -->
+        <div class="grid grid-cols-3 gap-6">
+            <!-- Employee List -->
+            <div class="col-span-2">
+                <div class="card">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="table-header">Employee Name</th>
+                                    <th class="table-header">Department</th>
+                                    <th class="table-header">Type</th>
+                                    <th class="table-header">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Mark Williams'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Mark Williams</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">HR</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Floyd Miles'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Floyd Miles</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">IT</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Cody Fisher'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Cody Fisher</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">Sales</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Dianne Russell'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Dianne Russell</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">Sales</td>
+                                    <td class="table-cell">Remote</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Savannah Nguyen'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Savannah+Nguyen&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Savannah Nguyen</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">Design</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Jacob Jones'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Jacob+Jones&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Jacob Jones</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">IT</td>
+                                    <td class="table-cell">Remote</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Marvin McKinney'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Marvin+McKinney&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Marvin McKinney</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">Development</td>
+                                    <td class="table-cell">Remote</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Brooklyn Simmons'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Brooklyn+Simmons&background=10b981&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Brooklyn Simmons</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">PM</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Kristin Watson'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Kristin+Watson&background=f59e0b&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Kristin Watson</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">HR</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                                <tr class="table-row cursor-pointer" @click="showDetail = true; selectedEmployee = 'Kathryn Murphy'">
+                                    <td class="table-cell">
+                                        <div class="flex items-center">
+                                            <img src="https://ui-avatars.com/api/?name=Kathryn+Murphy&background=6366f1&color=fff" alt="User" class="w-10 h-10 rounded-full mr-3">
+                                            <span class="font-medium">Kathryn Murphy</span>
+                                        </div>
+                                    </td>
+                                    <td class="table-cell">Development</td>
+                                    <td class="table-cell">Office</td>
+                                    <td class="table-cell"><span class="badge badge-success">Permanent</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                        <p class="text-sm text-gray-600">Showing 1 to 20 out of 30 results</p>
+                        <div class="flex items-center space-x-2">
+                            <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                                </svg>
+                            </button>
+                            <button class="px-3 py-1 bg-primary-500 text-white rounded-lg text-sm font-medium">1</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">2</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">3</button>
+                            <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employee Detail Panel -->
+            <div class="col-span-1">
+                <div class="card sticky top-24" x-show="showDetail" x-transition>
+                    <!-- Employee Header -->
+                    <div class="text-center pb-6 border-b border-gray-200">
+                        <div class="relative inline-block">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&h=400&fit=crop" alt="Employee" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover">
+                            <button class="absolute bottom-4 right-0 w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center text-white hover:bg-primary-600">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900" x-text="selectedEmployee"></h3>
+                        <p class="text-sm text-gray-600 mt-1">HR Manager</p>
+                        <div class="flex items-center justify-center space-x-4 mt-4">
+                            <div>
+                                <p class="text-xs text-gray-500">Department</p>
+                                <p class="text-sm font-medium text-gray-900">HR</p>
+                            </div>
+                            <div class="h-10 w-px bg-gray-300"></div>
+                            <div>
+                                <p class="text-xs text-gray-500">Designation</p>
+                                <p class="text-sm font-medium text-gray-900">Manager</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="text-left">
+                                <p class="text-xs text-gray-500">Joining Date</p>
+                                <p class="text-sm font-medium text-gray-900">Jan 11, 2023</p>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-xs text-gray-500">Last Login</p>
+                                <p class="text-sm font-medium text-gray-900">May 20, 2025</p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <span class="badge badge-success">Permanent</span>
+                        </div>
+                    </div>
+
+                    <!-- Expandable Sections -->
+                    <div class="py-4" x-data="{ openSection: 'personal' }">
+                        <!-- Personal Information -->
+                        <div class="border-b border-gray-200">
+                            <button @click="openSection = openSection === 'personal' ? '' : 'personal'" 
+                                    class="w-full flex items-center justify-between py-3 text-left">
+                                <span class="font-medium text-gray-900">Personal Information</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" 
+                                     :class="{ 'rotate-180': openSection === 'personal' }"
+                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div x-show="openSection === 'personal'" x-collapse class="pb-4 space-y-3">
+                                <div>
+                                    <p class="text-xs text-gray-500">Email</p>
+                                    <p class="text-sm text-gray-900">mark.williams@complihr.com</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Phone</p>
+                                    <p class="text-sm text-gray-900">+1 (555) 123-4567</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Address</p>
+                                    <p class="text-sm text-gray-900">123 Main St, New York, NY 10001</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Date of Birth</p>
+                                    <p class="text-sm text-gray-900">January 15, 1990</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Professional Information -->
+                        <div class="border-b border-gray-200">
+                            <button @click="openSection = openSection === 'professional' ? '' : 'professional'" 
+                                    class="w-full flex items-center justify-between py-3 text-left">
+                                <span class="font-medium text-gray-900">Professional Information</span>
+                                <svg class="w-5 h-5 text-gray-400 transition-transform" 
+                                     :class="{ 'rotate-180': openSection === 'professional' }"
+                                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                </svg>
+                            </button>
+                            <div x-show="openSection === 'professional'" x-collapse class="pb-4 space-y-3">
+                                <div>
+                                    <p class="text-xs text-gray-500">Employee ID</p>
+                                    <p class="text-sm text-gray-900">EMP-001234</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Reports To</p>
+                                    <p class="text-sm text-gray-900">Robert Allen</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Work Location</p>
+                                    <p class="text-sm text-gray-900">New York Office</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-500">Salary</p>
+                                    <p class="text-sm text-gray-900">$85,000/year</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="pt-4 border-t border-gray-200">
+                        <button class="btn-primary w-full">See Full Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

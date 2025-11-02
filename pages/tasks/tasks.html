@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Task List</h1>
+            <button class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Create Task
+            </button>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 flex-1">
+                    <div class="relative flex-1 max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" 
+                               placeholder="Search by name, role, department..." 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent sm:text-sm">
+                    </div>
+                    <select class="form-input w-48">
+                        <option>All Status</option>
+                        <option>Completed</option>
+                        <option>In Progress</option>
+                        <option>Pending</option>
+                    </select>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                            </svg>
+                        </button>
+                        <span class="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-2 rounded-lg">Today</span>
+                        <button class="p-2 border border-gray-300 rounded-lg hover:bg-gray-50">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cleaning Section -->
+        <div class="mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Cleaning</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Task Card 1 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1563453392212-326f5e854473?w=800&h=400&fit=crop" alt="Task" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-success mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Fridge Cleaning</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Card 2 -->
+                <div class="event-card">
+                    <div class="p-4 bg-gray-100 h-48 flex items-center justify-center">
+                        <span class="text-gray-400">No image</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-error mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Fridge Cleaning</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Section -->
+        <div class="mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Management</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Task Card 3 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&h=400&fit=crop" alt="Task" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-success mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Freezers temperature check</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=John+Doe&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Card 4 -->
+                <div class="event-card">
+                    <div class="p-4 bg-gray-100 h-48 flex items-center justify-center">
+                        <span class="text-gray-400">No image</span>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-warning mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Aisle 4 re shelving</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=f59e0b&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="mb-8">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">Security</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Task Card 5 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=800&h=400&fit=crop" alt="Task" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-success mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Security Cameras Installation in Warehouse</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=Bob+Wilson&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task Card 6 -->
+                <div class="event-card">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&h=400&fit=crop" alt="Task" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <div class="flex items-center">
+                                <span class="status-dot status-dot-success mr-2"></span>
+                                <h3 class="font-semibold text-gray-900">Turn off fire alarms in the morning</h3>
+                            </div>
+                            <span class="text-sm text-gray-500">22-06-2025</span>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Wellington</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center -space-x-2">
+                                <img src="https://ui-avatars.com/api/?name=Alice+Brown&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            </div>
+                            <button class="btn-primary btn-sm">Read more</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="min-h-screen flex">
+        <!-- Left Side - Login Form -->
+        <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+            <div class="mx-auto w-full max-w-sm lg:w-96">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-2xl">C</span>
+                    </div>
+                    <span class="ml-3 text-2xl font-bold text-gray-900">CompliHR</span>
+                </div>
+
+                <!-- Heading -->
+                <div class="mt-8">
+                    <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
+                    <p class="mt-2 text-sm text-gray-600">
+                        Sign in to your account to continue
+                    </p>
+                </div>
+
+                <!-- Form -->
+                <div class="mt-8">
+                    <form action="/pages/dashboard/dashboard.html" method="GET" class="space-y-6">
+                        <!-- Email -->
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700">
+                                Email address
+                            </label>
+                            <div class="mt-1">
+                                <input id="email" 
+                                       name="email" 
+                                       type="email" 
+                                       autocomplete="email" 
+                                       required
+                                       value="robert@complihr.com"
+                                       class="form-input">
+                            </div>
+                        </div>
+
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700">
+                                Password
+                            </label>
+                            <div class="mt-1">
+                                <input id="password" 
+                                       name="password" 
+                                       type="password" 
+                                       autocomplete="current-password" 
+                                       required
+                                       value="password123"
+                                       class="form-input">
+                            </div>
+                        </div>
+
+                        <!-- Remember Me & Forgot Password -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input id="remember-me" 
+                                       name="remember-me" 
+                                       type="checkbox"
+                                       class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-900">
+                                    Remember me
+                                </label>
+                            </div>
+
+                            <div class="text-sm">
+                                <a href="forgot-password.html" class="font-medium text-primary-600 hover:text-primary-500">
+                                    Forgot password?
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" class="btn-primary w-full btn-lg">
+                                Sign in
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Divider -->
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-2 bg-gray-50 text-gray-500">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <!-- SSO Buttons -->
+                        <div class="mt-6 grid grid-cols-2 gap-3">
+                            <button type="button" class="btn-secondary flex items-center justify-center">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                <span class="ml-2">Google</span>
+                            </button>
+
+                            <button type="button" class="btn-secondary flex items-center justify-center">
+                                <svg class="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M23.5 12.3c0-.8-.1-1.6-.3-2.3H12v4.4h6.5c-.3 1.5-1.2 2.8-2.6 3.6v3h4.2c2.5-2.3 3.9-5.7 3.9-9.7z"/>
+                                    <path d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.9-3c-1.1.7-2.4 1.2-4 1.2-3.1 0-5.7-2.1-6.6-4.9H1.1v3.1C3.1 21 7.2 24 12 24z"/>
+                                    <path d="M5.4 14.4c-.2-.7-.3-1.4-.3-2.1s.1-1.5.3-2.1V7.1H1.1C.4 8.5 0 10.2 0 12s.4 3.5 1.1 4.9l4.3-3.5z"/>
+                                    <path d="M12 4.8c1.8 0 3.3.6 4.6 1.8l3.4-3.4C17.9 1.2 15.2 0 12 0 7.2 0 3.1 3 1.1 7.1l4.3 3.3C6.3 7.9 8.9 4.8 12 4.8z"/>
+                                </svg>
+                                <span class="ml-2">Microsoft</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Register Link -->
+                    <div class="mt-6">
+                        <p class="text-center text-sm text-gray-600">
+                            Don't have an account?
+                            <a href="register.html" class="font-medium text-primary-600 hover:text-primary-500">
+                                Sign up
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Image/Illustration -->
+        <div class="hidden lg:block relative w-0 flex-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-primary-600 to-purple-700 flex items-center justify-center p-12">
+                <div class="max-w-md">
+                    <h1 class="text-4xl font-bold text-white mb-4">
+                        Streamline Your HR Operations
+                    </h1>
+                    <p class="text-lg text-primary-100 mb-8">
+                        Manage employees, attendance, leave requests, and more - all in one powerful platform.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="ml-3 text-primary-100">Easy employee management</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="ml-3 text-primary-100">Real-time attendance tracking</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="ml-3 text-primary-100">Automated payroll processing</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="ml-3 text-primary-100">Comprehensive reporting</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

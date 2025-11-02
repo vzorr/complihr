@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organization Settings - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+            <p class="text-sm text-gray-600">Manage your dashboard here</p>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button class="px-4 py-3 text-sm font-medium text-primary-600 border-b-2 border-primary-600">General</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Company Structure</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Scheduled Jobs</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Bank Holidays</button>
+            </div>
+        </div>
+
+        <!-- Settings Form -->
+        <div class="card max-w-3xl">
+            <h2 class="text-lg font-semibold text-gray-900 mb-6">General</h2>
+            
+            <form class="space-y-6">
+                <!-- Company Name -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Company name</label>
+                    <input type="text" value="Staveco Clash & Carry" class="form-input">
+                </div>
+
+                <!-- Address -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                    <input type="text" value="Carter Gate Works" class="form-input">
+                </div>
+
+                <!-- City -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                    <input type="text" value="Thornbury Road" class="form-input">
+                </div>
+
+                <!-- Postcode and Country -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Postcode</label>
+                        <input type="text" value="BD3 8HF" class="form-input">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+                        <select class="form-input">
+                            <option selected>United Kingdom</option>
+                            <option>United States</option>
+                            <option>Canada</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Province/Email -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Province</label>
+                        <select class="form-input">
+                            <option selected>England</option>
+                            <option>Scotland</option>
+                            <option>Wales</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" value="shiraza@stavecoandco.uk" class="form-input">
+                    </div>
+                </div>
+
+                <!-- Day Start/First Day of Week -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Day Start (Hours)</label>
+                        <select class="form-input">
+                            <option>0:00</option>
+                            <option selected>24 Hours</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">First Day of week</label>
+                        <select class="form-input">
+                            <option selected>Monday</option>
+                            <option>Sunday</option>
+                            <option>Saturday</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- VAT -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">VAT</label>
+                    <input type="text" value="67329163712" class="form-input">
+                </div>
+
+                <!-- Logo Upload -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Upload your logo</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-500 transition-colors cursor-pointer">
+                        <svg class="w-12 h-12 text-primary-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                        </svg>
+                        <p class="text-sm text-gray-600 mb-1">Drag & Drop or choose file to upload</p>
+                        <p class="text-xs text-gray-400">Supported formats: jpeg, png, svg</p>
+                        <input type="file" class="hidden" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- Save Button -->
+                <div class="flex items-center justify-end pt-4">
+                    <button type="submit" class="btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

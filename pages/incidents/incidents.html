@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incidents & Maintenance - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Incidents & Maintenance</h1>
+                <p class="text-sm text-gray-600">Track and manage workplace incidents and maintenance requests</p>
+            </div>
+            <button class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Report Incident
+            </button>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Total Incidents</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1">127</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Open</p>
+                        <p class="text-2xl font-bold text-error-600 mt-1">23</p>
+                    </div>
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">In Progress</p>
+                        <p class="text-2xl font-bold text-warning-600 mt-1">34</p>
+                    </div>
+                    <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Resolved</p>
+                        <p class="text-2xl font-bold text-success-600 mt-1">70</p>
+                    </div>
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button class="px-4 py-3 text-sm font-medium text-primary-600 border-b-2 border-primary-600">All Incidents</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Safety Issues</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Maintenance</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Equipment</button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 flex-1">
+                    <div class="relative flex-1 max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" 
+                               placeholder="Search incidents..." 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent sm:text-sm">
+                    </div>
+                    <select class="form-input w-48">
+                        <option>All Statuses</option>
+                        <option>Open</option>
+                        <option>In Progress</option>
+                        <option>Resolved</option>
+                        <option>Closed</option>
+                    </select>
+                    <select class="form-input w-48">
+                        <option>All Priorities</option>
+                        <option>Critical</option>
+                        <option>High</option>
+                        <option>Medium</option>
+                        <option>Low</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incidents Table -->
+        <div class="card">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">ID</th>
+                            <th class="table-header">Title</th>
+                            <th class="table-header">Category</th>
+                            <th class="table-header">Priority</th>
+                            <th class="table-header">Reported By</th>
+                            <th class="table-header">Date</th>
+                            <th class="table-header">Status</th>
+                            <th class="table-header">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell font-medium text-primary-600">#INC-127</td>
+                            <td class="table-cell">Broken equipment in warehouse</td>
+                            <td class="table-cell"><span class="badge badge-warning">Equipment</span></td>
+                            <td class="table-cell"><span class="badge badge-error">Critical</span></td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Mark Williams</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">2025-01-15</td>
+                            <td class="table-cell"><span class="badge badge-error">Open</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700 mr-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-600 hover:text-gray-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium text-primary-600">#INC-126</td>
+                            <td class="table-cell">Slip hazard near entrance</td>
+                            <td class="table-cell"><span class="badge bg-red-100 text-red-700">Safety</span></td>
+                            <td class="table-cell"><span class="badge badge-error">High</span></td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Floyd Miles</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">2025-01-14</td>
+                            <td class="table-cell"><span class="badge badge-pending">In Progress</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700 mr-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-600 hover:text-gray-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium text-primary-600">#INC-125</td>
+                            <td class="table-cell">AC unit not working - Floor 3</td>
+                            <td class="table-cell"><span class="badge bg-blue-100 text-blue-700">Maintenance</span></td>
+                            <td class="table-cell"><span class="badge badge-warning">Medium</span></td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Cody Fisher</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">2025-01-13</td>
+                            <td class="table-cell"><span class="badge badge-success">Resolved</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700 mr-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-600 hover:text-gray-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium text-primary-600">#INC-124</td>
+                            <td class="table-cell">Fire extinguisher inspection overdue</td>
+                            <td class="table-cell"><span class="badge bg-red-100 text-red-700">Safety</span></td>
+                            <td class="table-cell"><span class="badge badge-error">High</span></td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Dianne Russell</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">2025-01-12</td>
+                            <td class="table-cell"><span class="badge badge-pending">In Progress</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700 mr-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-600 hover:text-gray-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium text-primary-600">#INC-123</td>
+                            <td class="table-cell">Printer needs maintenance</td>
+                            <td class="table-cell"><span class="badge badge-warning">Equipment</span></td>
+                            <td class="table-cell"><span class="badge bg-gray-100 text-gray-700">Low</span></td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Jacob+Jones&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Jacob Jones</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">2025-01-11</td>
+                            <td class="table-cell"><span class="badge badge-success">Resolved</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700 mr-2">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                                <button class="text-gray-600 hover:text-gray-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                <p class="text-sm text-gray-600">Showing 5 of 127 results</p>
+                <div class="flex items-center space-x-2">
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="px-3 py-1 bg-primary-500 text-white rounded-lg text-sm font-medium">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">3</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

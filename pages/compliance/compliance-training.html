@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compliance Training - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Compliance Training</h1>
+                <p class="text-sm text-gray-600">Manage employee training and certifications</p>
+            </div>
+            <button class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add Training Course
+            </button>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Total Courses</p>
+                        <p class="text-2xl font-bold text-gray-900 mt-1">24</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Completed</p>
+                        <p class="text-2xl font-bold text-success-600 mt-1">487</p>
+                    </div>
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">In Progress</p>
+                        <p class="text-2xl font-bold text-warning-600 mt-1">156</p>
+                    </div>
+                    <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600">Overdue</p>
+                        <p class="text-2xl font-bold text-error-600 mt-1">23</p>
+                    </div>
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button class="px-4 py-3 text-sm font-medium text-primary-600 border-b-2 border-primary-600">Training Courses</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Employee Progress</button>
+                <button class="px-4 py-3 text-sm font-medium text-gray-600 hover:text-gray-900">Certifications</button>
+            </div>
+        </div>
+
+        <!-- Training Courses Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Course Card 1 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-primary-500 to-primary-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Data Privacy & GDPR</h3>
+                <p class="text-sm text-gray-600 mb-4">Essential training on data protection regulations and best practices</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 2 hours</span>
+                    <span class="badge badge-success">Mandatory</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">87%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-success-500 h-2 rounded-full" style="width: 87%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+
+            <!-- Course Card 2 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-success-500 to-success-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Workplace Safety</h3>
+                <p class="text-sm text-gray-600 mb-4">Health and safety procedures for a secure work environment</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 1.5 hours</span>
+                    <span class="badge badge-success">Mandatory</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">92%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-success-500 h-2 rounded-full" style="width: 92%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+
+            <!-- Course Card 3 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-warning-500 to-warning-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Diversity & Inclusion</h3>
+                <p class="text-sm text-gray-600 mb-4">Building an inclusive workplace culture and understanding bias</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 1 hour</span>
+                    <span class="badge badge-warning">Optional</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">64%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-warning-500 h-2 rounded-full" style="width: 64%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+
+            <!-- Course Card 4 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-error-500 to-error-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Anti-Harassment Policy</h3>
+                <p class="text-sm text-gray-600 mb-4">Understanding workplace harassment and prevention strategies</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 1.5 hours</span>
+                    <span class="badge badge-success">Mandatory</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">78%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-success-500 h-2 rounded-full" style="width: 78%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+
+            <!-- Course Card 5 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Cybersecurity Basics</h3>
+                <p class="text-sm text-gray-600 mb-4">Protecting company data and recognizing security threats</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 2 hours</span>
+                    <span class="badge badge-success">Mandatory</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">95%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-success-500 h-2 rounded-full" style="width: 95%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+
+            <!-- Course Card 6 -->
+            <div class="card hover:shadow-elevated transition-shadow">
+                <div class="w-full h-40 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg mb-4 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-gray-900 mb-2">Ethics & Compliance</h3>
+                <p class="text-sm text-gray-600 mb-4">Company code of conduct and ethical decision making</p>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs text-gray-500">Duration: 1 hour</span>
+                    <span class="badge badge-success">Mandatory</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-center justify-between text-sm mb-1">
+                        <span class="text-gray-600">Completion Rate</span>
+                        <span class="font-medium text-gray-900">89%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-success-500 h-2 rounded-full" style="width: 89%"></div>
+                    </div>
+                </div>
+                <button class="btn-primary w-full btn-sm">View Course</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

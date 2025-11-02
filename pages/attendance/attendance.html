@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Attendance</h1>
+            <button class="btn-primary">Export CSV</button>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <!-- Total Employee -->
+            <div class="kpi-card kpi-card-purple">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-primary-700">Total Employee</p>
+                        <p class="text-3xl font-bold text-primary-900 mt-2">560</p>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-success-600 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                                </svg>
+                                13%
+                            </span>
+                            <span class="text-gray-600 ml-2">Update: July 11, 2025</span>
+                        </div>
+                    </div>
+                    <div class="bg-primary-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Employees -->
+            <div class="kpi-card kpi-card-green">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-success-700">Active Employees</p>
+                        <p class="text-3xl font-bold text-success-900 mt-2">500</p>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-success-600 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+                                </svg>
+                                3%
+                            </span>
+                            <span class="text-gray-600 ml-2">Update: July 14, 2025</span>
+                        </div>
+                    </div>
+                    <div class="bg-success-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-success-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employees on Holidays -->
+            <div class="kpi-card kpi-card-red">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-error-700">Employees on Holidays</p>
+                        <p class="text-3xl font-bold text-error-900 mt-2">45</p>
+                        <div class="flex items-center mt-2 text-sm">
+                            <span class="text-error-600 flex items-center">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+                                </svg>
+                                6%
+                            </span>
+                            <span class="text-gray-600 ml-2">Update: Aug 10, 2025</span>
+                        </div>
+                    </div>
+                    <div class="bg-error-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-error-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters and Actions -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 flex-1">
+                    <div class="relative flex-1 max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <input type="search" 
+                               placeholder="Search by name, role, department..." 
+                               class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-primary-500 focus:border-transparent sm:text-sm">
+                    </div>
+                    <select class="form-input w-48">
+                        <option>All Departments</option>
+                        <option>HR</option>
+                        <option>IT</option>
+                        <option>Sales</option>
+                        <option>Marketing</option>
+                    </select>
+                    <input type="date" class="form-input w-40" value="2024-01-13">
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Table -->
+        <div class="card">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">Date</th>
+                            <th class="table-header">Employee</th>
+                            <th class="table-header">Role</th>
+                            <th class="table-header">Employment Type</th>
+                            <th class="table-header">Status</th>
+                            <th class="table-header">Check In</th>
+                            <th class="table-header">Check Out</th>
+                            <th class="table-header">Over Time</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Mark Williams</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">HR Manager</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:00 PM</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Floyd Miles</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Software Engineer</td>
+                            <td class="table-cell"><span class="badge badge-warning">Part-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-absent">Absent</span></td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Cody Fisher</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Marketing Executive</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-late">Late</span></td>
+                            <td class="table-cell">10:15 AM</td>
+                            <td class="table-cell">05:00 PM</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Dianne</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Financial Analyst</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">06:00 PM</td>
+                            <td class="table-cell">1h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Jacob+Jones&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Jacob</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Project Manager</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:00 PM</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Kristin+Watson&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Kristin</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Sales Manager</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-leave">Leave</span></td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">2h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Mark+Wilson&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Mark Williams</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">HR Manager</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:00 PM</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Floyd+Miller&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Floyds Miles</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Software Engineer</td>
+                            <td class="table-cell"><span class="badge badge-warning">Part-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-absent">Absent</span></td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">-</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Cody Fisher</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Marketing Executive</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-late">Late</span></td>
+                            <td class="table-cell">10:15 AM</td>
+                            <td class="table-cell">05:00 PM</td>
+                            <td class="table-cell">0h</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">15/01</td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span>Dianne</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Financial Analyst</td>
+                            <td class="table-cell"><span class="badge badge-primary">Full-Time</span></td>
+                            <td class="table-cell"><span class="badge badge-present">Present</span></td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">06:00 PM</td>
+                            <td class="table-cell">1h</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between mt-4 pt-4 border-t border-gray-200">
+                <p class="text-sm text-gray-600">Showing 10 of 50 results</p>
+                <div class="flex items-center space-x-2">
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <button class="px-3 py-1 bg-primary-500 text-white rounded-lg text-sm font-medium">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">3</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

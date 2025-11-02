@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & News - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Events & News</h1>
+        </div>
+
+        <!-- Pinned Announcements -->
+        <div class="mb-8">
+            <div class="flex items-center mb-4">
+                <svg class="w-5 h-5 text-primary-600 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                </svg>
+                <h2 class="text-lg font-semibold text-gray-900">Pinned Announcements</h2>
+            </div>
+            
+            <div class="card">
+                <h3 class="font-semibold text-gray-900 mb-2">Staff Notice: Payslip Collection & Pay Date Reminder</h3>
+                <p class="text-gray-600 mb-4">Hi Team,</p>
+                <p class="text-gray-600 mb-4">As you are aware, we pay on the 5th of each calendar month, and wages are calculated from month to month. Please note, payment will never be later than the 5th, but I always do my best to process it earlier - usually by the 1st or 2nd, depending on public holidays and other factors.</p>
+                <p class="text-gray-600 mb-4">Once your wages have been received in your account, please come and see me to collect your wage slips.</p>
+                <p class="text-gray-600 mb-4">Thank you for your cooperation!</p>
+            </div>
+        </div>
+
+        <!-- Announcements -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-semibold text-gray-900">Announcements</h2>
+                <button class="btn-primary btn-sm">+ Add</button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Announcement Card 1 -->
+                <div class="card">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="font-semibold text-gray-900">Staff Notice: Payslip Collection & Pay Date Reminder</h3>
+                        <button class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">Currently, I have a few templates in the Local Library and when I want to add them I'm always presented (by default)...</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Bob+Wilson&background=f59e0b&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 2 -->
+                <div class="card">
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="font-semibold text-gray-900">Staff Announcement: Important Reminder About Breaks</h3>
+                        <button class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-4">When you save some sections as a template and then paste a shortcode to a new page, the layout is broken, some styles are missing - in the editor.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Charlie+Davis&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+
+                <!-- Announcement Card 3 -->
+                <div class="card">
+                    <div class="mb-3">
+                        <h3 class="font-semibold text-gray-900 mb-2">Annual Leave Announcement</h3>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=400&fit=crop" alt="Announcement" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <p class="text-sm text-gray-600 mb-4">I want to be able to set the default Library tab (or a way to remember the last active tab), especially when I already...</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Alice+Brown&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=David+Miller&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Events Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Event Card 1 -->
+            <div class="event-card">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=400&fit=crop" alt="Event" class="w-full h-48 object-cover">
+                    <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-md">
+                        <div class="text-xs text-gray-600">22</div>
+                        <div class="text-xs font-semibold">JUL</div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">Food & Lifestyle Mela</h3>
+                    <p class="text-sm text-gray-500 mb-3">22-07-2025</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=John+Doe&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Jane+Smith&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Bob+Wilson&background=f59e0b&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <span class="text-xs text-gray-500 ml-2">+3</span>
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card">
+                <div class="relative">
+                    <div class="w-full h-48 bg-gradient-to-br from-purple-500 to-pink-500"></div>
+                    <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-md">
+                        <div class="text-xs text-gray-600">24</div>
+                        <div class="text-xs font-semibold">JUL</div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">Ramadan</h3>
+                    <p class="text-sm text-gray-500 mb-3">24-07-2026</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Charlie+Davis&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Eve+Anderson&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Frank+Thomas&background=f59e0b&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <span class="text-xs text-gray-500 ml-2">+3</span>
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card">
+                <div class="relative">
+                    <div class="w-full h-48 bg-gradient-to-br from-blue-500 to-cyan-500"></div>
+                    <div class="absolute top-4 left-4 bg-white rounded-lg px-3 py-2 shadow-md">
+                        <div class="text-xs text-gray-600">17</div>
+                        <div class="text-xs font-semibold">DEC</div>
+                    </div>
+                </div>
+                <div class="p-4">
+                    <h3 class="font-semibold text-gray-900 mb-2">Christmas Carnival</h3>
+                    <p class="text-sm text-gray-500 mb-3">17-12-2025</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center -space-x-2">
+                            <img src="https://ui-avatars.com/api/?name=Grace+Wilson&background=6366f1&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Henry+Brown&background=10b981&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <img src="https://ui-avatars.com/api/?name=Ivy+Davis&background=f59e0b&color=fff" alt="User" class="w-6 h-6 rounded-full border-2 border-white">
+                            <span class="text-xs text-gray-500 ml-2">+3</span>
+                        </div>
+                        <button class="btn-primary btn-sm">Read more</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
