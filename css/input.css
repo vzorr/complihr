@@ -166,6 +166,27 @@
     @apply mr-3;
   }
 
+  /* Sidebar Section Toggle */
+  .section-toggle {
+    @apply cursor-pointer select-none;
+  }
+
+  .section-toggle:focus {
+    @apply outline-none;
+  }
+
+  .chevron {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+
+  .chevron.rotate-180 {
+    @apply -rotate-180;
+  }
+
+  .section-content {
+    @apply transition-all duration-300 ease-in-out overflow-hidden;
+  }
+
   /* Sidebar Active States */
   .sidebar-active {
     @apply bg-primary-50 text-primary-600 border-l-4 border-primary-600;

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Punch Clock - CompliHR</title>
+  <link rel="stylesheet" href="../../css/input.css">
+  <script src="../../js/main.js"></script>
+  <script src="../../js/punch-clock.js"></script>
+</head>
+<body class="bg-gray-50">
+  <!-- Sidebar -->
+  <div id="sidebar-container"></div>
+
+  <!-- Main Content -->
+  <div class="ml-64 min-h-screen">
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Page Content -->
+    <main class="p-6">
+      <!-- Page Header -->
+      <div class="mb-6">
+        <h1 class="text-2xl font-bold text-gray-900">Punch Clock</h1>
+        <p class="text-gray-600 mt-1">Clock in and out to track your work hours</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Punch Clock Card -->
+        <div class="lg:col-span-1">
+          <div class="card sticky top-6">
+            <!-- Current Time Display -->
+            <div class="text-center mb-6">
+              <div class="text-gray-600 text-sm font-medium mb-2">Current Time</div>
+              <div id="current-time" class="text-4xl font-bold text-gray-900 mb-1">--:--:--</div>
+              <div id="current-date" class="text-gray-600 text-sm">--</div>
+            </div>
+
+            <!-- Status Display -->
+            <div class="mb-6 p-4 rounded-lg bg-gray-50 text-center">
+              <div class="text-sm text-gray-600 mb-1">Current Status</div>
+              <div id="punch-status" class="text-lg font-semibold text-gray-900">
+                <span class="inline-flex items-center">
+                  <span class="status-dot status-dot-error mr-2"></span>
+                  Clocked Out
+                </span>
+              </div>
+              <div id="last-punch-time" class="text-xs text-gray-500 mt-2">--</div>
+            </div>
+
+            <!-- Punch Buttons -->
+            <div class="space-y-3">
+              <button id="punch-in-btn" class="btn-primary w-full btn-lg" onclick="punchIn()">
+                <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Clock In
+              </button>
+              
+              <button id="punch-out-btn" class="btn-secondary w-full btn-lg" onclick="punchOut()" disabled>
+                <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+                Clock Out
+              </button>
+            </div>
+
+            <!-- Today's Summary -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <div class="text-sm font-semibold text-gray-900 mb-3">Today's Summary</div>
+              <div class="space-y-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Clock In</span>
+                  <span id="today-clock-in" class="font-medium text-gray-900">--:--</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600">Clock Out</span>
+                  <span id="today-clock-out" class="font-medium text-gray-900">--:--</span>
+                </div>
+                <div class="flex justify-between text-sm pt-2 border-t">
+                  <span class="text-gray-600">Total Hours</span>
+                  <span id="today-total-hours" class="font-semibold text-primary-600">0h 0m</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Punch History -->
+        <div class="lg:col-span-2">
+          <!-- Today's Punches -->
+          <div class="card mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-semibold text-gray-900">Today's Punches</h2>
+              <span id="today-punches-count" class="badge badge-primary">0 punches</span>
+            </div>
+            
+            <div id="today-punches-list" class="space-y-3">
+              <!-- Punches will be dynamically inserted here -->
+              <div class="text-center py-8 text-gray-500">
+                No punches recorded today
+              </div>
+            </div>
+          </div>
+
+          <!-- Punch History Table -->
+          <div class="card">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-semibold text-gray-900">Punch History</h2>
+              <div class="flex items-center space-x-2">
+                <select id="history-filter" class="form-input text-sm" onchange="filterHistory()">
+                  <option value="7">Last 7 days</option>
+                  <option value="14">Last 14 days</option>
+                  <option value="30">Last 30 days</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="table-container">
+              <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="table-header">Date</th>
+                    <th class="table-header">Clock In</th>
+                    <th class="table-header">Clock Out</th>
+                    <th class="table-header">Total Hours</th>
+                    <th class="table-header">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="punch-history-tbody" class="bg-white divide-y divide-gray-200">
+                  <!-- History will be dynamically inserted here -->
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+              <div class="text-sm text-gray-700">
+                Showing <span id="showing-from">1</span> to <span id="showing-to">10</span> of <span id="total-records">0</span> records
+              </div>
+              <div class="flex space-x-2">
+                <button onclick="previousPage()" class="btn-secondary btn-sm" id="prev-btn" disabled>Previous</button>
+                <button onclick="nextPage()" class="btn-secondary btn-sm" id="next-btn">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/js/punch-clock.js"></script>
+</body>
+</html>
