@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Reports - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ reportType: 'summary' }">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Expense Reports</h1>
+                <p class="text-gray-600 mt-1">Comprehensive expense analytics and insights</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button class="btn-secondary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                    </svg>
+                    Export PDF
+                </button>
+                <button class="btn-primary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Download Excel
+                </button>
+            </div>
+        </div>
+
+        <!-- Report Filters -->
+        <div class="card mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Report Parameters</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Report Type</label>
+                    <select class="form-input" x-model="reportType">
+                        <option value="summary">Summary Report</option>
+                        <option value="detailed">Detailed Report</option>
+                        <option value="category">By Category</option>
+                        <option value="employee">By Employee</option>
+                        <option value="department">By Department</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                    <select class="form-input">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>This Quarter</option>
+                        <option>Last Quarter</option>
+                        <option>This Year</option>
+                        <option>Custom Range</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                    <select class="form-input">
+                        <option>All Departments</option>
+                        <option>Human Resources</option>
+                        <option>Sales</option>
+                        <option>Marketing</option>
+                        <option>Engineering</option>
+                        <option>Finance</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <select class="form-input">
+                        <option>All Status</option>
+                        <option>Approved</option>
+                        <option>Pending</option>
+                        <option>Paid</option>
+                        <option>Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex items-center justify-end">
+                <button class="btn-primary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                    Generate Report
+                </button>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="card">
+                <p class="text-sm text-gray-600 mb-1">Total Expenses</p>
+                <p class="text-3xl font-bold text-gray-900">$542,380</p>
+                <p class="text-xs text-gray-600 mt-2">Year to date</p>
+            </div>
+            <div class="card">
+                <p class="text-sm text-gray-600 mb-1">Average per Month</p>
+                <p class="text-3xl font-bold text-gray-900">$49,307</p>
+                <p class="text-xs text-success-600 mt-2">-5.2% vs last year</p>
+            </div>
+            <div class="card">
+                <p class="text-sm text-gray-600 mb-1">Total Claims</p>
+                <p class="text-3xl font-bold text-gray-900">1,245</p>
+                <p class="text-xs text-gray-600 mt-2">This year</p>
+            </div>
+            <div class="card">
+                <p class="text-sm text-gray-600 mb-1">Avg Claim Value</p>
+                <p class="text-3xl font-bold text-gray-900">$435</p>
+                <p class="text-xs text-warning-600 mt-2">+8.3% vs last year</p>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Monthly Trend -->
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Monthly Expense Trend</h3>
+                <canvas id="monthlyTrendChart" height="300"></canvas>
+            </div>
+
+            <!-- Category Breakdown -->
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Category Breakdown</h3>
+                <canvas id="categoryBreakdownChart" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Detailed Tables -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Expense by Category -->
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Expense by Category</h3>
+                <div class="space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-900">Travel</span>
+                            <span class="text-sm font-bold text-gray-900">$185,600</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary-500" style="width: 34.2%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">34.2% of total • 458 claims</p>
+                    </div>
+                    
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-900">Marketing</span>
+                            <span class="text-sm font-bold text-gray-900">$124,300</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-success-500" style="width: 22.9%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">22.9% of total • 234 claims</p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-900">Software & Subscriptions</span>
+                            <span class="text-sm font-bold text-gray-900">$98,450</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-warning-500" style="width: 18.2%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">18.2% of total • 156 claims</p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-900">Office Supplies</span>
+                            <span class="text-sm font-bold text-gray-900">$67,530</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-error-500" style="width: 12.5%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">12.5% of total • 312 claims</p>
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm font-medium text-gray-900">Meals & Entertainment</span>
+                            <span class="text-sm font-bold text-gray-900">$66,500</span>
+                        </div>
+                        <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                            <div class="h-full bg-purple-500" style="width: 12.2%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">12.2% of total • 85 claims</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Departments -->
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Top Departments by Spending</h3>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Sales</p>
+                            <p class="text-xs text-gray-600">234 claims</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">$216,450</p>
+                            <p class="text-xs text-gray-600">39.9%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Marketing</p>
+                            <p class="text-xs text-gray-600">189 claims</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">$156,780</p>
+                            <p class="text-xs text-gray-600">28.9%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Engineering</p>
+                            <p class="text-xs text-gray-600">145 claims</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">$98,340</p>
+                            <p class="text-xs text-gray-600">18.1%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Human Resources</p>
+                            <p class="text-xs text-gray-600">78 claims</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">$45,210</p>
+                            <p class="text-xs text-gray-600">8.3%</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <p class="text-sm font-medium text-gray-900">Finance</p>
+                            <p class="text-xs text-gray-600">42 claims</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-bold text-gray-900">$25,600</p>
+                            <p class="text-xs text-gray-600">4.8%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Report Table -->
+        <div class="card">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Detailed Expense Report</h3>
+                <button class="text-sm text-primary-600 hover:text-primary-700 font-medium">
+                    View All →
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header text-left">Date</th>
+                            <th class="table-header text-left">Employee</th>
+                            <th class="table-header text-left">Department</th>
+                            <th class="table-header text-left">Category</th>
+                            <th class="table-header text-left">Description</th>
+                            <th class="table-header text-right">Amount</th>
+                            <th class="table-header text-left">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell">Nov 15, 2025</td>
+                            <td class="table-cell">Robert Allen</td>
+                            <td class="table-cell">HR</td>
+                            <td class="table-cell">Travel</td>
+                            <td class="table-cell">Flight to NYC</td>
+                            <td class="table-cell text-right">$1,245.00</td>
+                            <td class="table-cell"><span class="badge badge-success">Paid</span></td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Nov 14, 2025</td>
+                            <td class="table-cell">Sarah Johnson</td>
+                            <td class="table-cell">Sales</td>
+                            <td class="table-cell">Office Supplies</td>
+                            <td class="table-cell">Printer paper</td>
+                            <td class="table-cell text-right">$342.50</td>
+                            <td class="table-cell"><span class="badge badge-success">Paid</span></td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Nov 13, 2025</td>
+                            <td class="table-cell">Michael Chen</td>
+                            <td class="table-cell">Marketing</td>
+                            <td class="table-cell">Meals</td>
+                            <td class="table-cell">Client lunch</td>
+                            <td class="table-cell text-right">$89.00</td>
+                            <td class="table-cell"><span class="badge badge-warning">Pending</span></td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Nov 12, 2025</td>
+                            <td class="table-cell">Emily Davis</td>
+                            <td class="table-cell">Engineering</td>
+                            <td class="table-cell">Software</td>
+                            <td class="table-cell">Adobe subscription</td>
+                            <td class="table-cell text-right">$499.00</td>
+                            <td class="table-cell"><span class="badge badge-success">Paid</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script>
+        // Monthly Trend Chart
+        const monthlyTrendCtx = document.getElementById('monthlyTrendChart').getContext('2d');
+        new Chart(monthlyTrendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                datasets: [{
+                    label: 'Expenses',
+                    data: [42500, 45300, 48200, 46800, 49500, 51200, 47800, 50100, 48900, 52300, 49307],
+                    backgroundColor: '#6366f1',
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Category Breakdown Chart
+        const categoryBreakdownCtx = document.getElementById('categoryBreakdownChart').getContext('2d');
+        new Chart(categoryBreakdownCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Travel', 'Marketing', 'Software', 'Office Supplies', 'Meals', 'Other'],
+                datasets: [{
+                    data: [185600, 124300, 98450, 67530, 66500, 0],
+                    backgroundColor: [
+                        '#6366f1',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444',
+                        '#8b5cf6',
+                        '#6b7280'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

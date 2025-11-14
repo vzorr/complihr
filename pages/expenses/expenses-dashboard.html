@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expenses Dashboard - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Expenses Dashboard</h1>
+                <p class="text-gray-600 mt-1">Monitor and manage company expenses</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <select class="form-input">
+                    <option selected>November 2025</option>
+                    <option>October 2025</option>
+                    <option>September 2025</option>
+                    <option>Q4 2025</option>
+                    <option>Q3 2025</option>
+                </select>
+                <a href="/pages/expenses/expense-claims.html" class="btn-secondary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                    </svg>
+                    View Claims
+                </a>
+                <button class="btn-primary" onclick="window.location.href='/pages/expenses/expense-claim-modal.html'">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Submit Claim
+                </button>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="kpi-card kpi-card-purple">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-primary-600">This Month</span>
+                </div>
+                <h3 class="text-sm text-primary-700 mb-1">Total Expenses</h3>
+                <div class="flex items-baseline">
+                    <p class="text-3xl font-bold text-primary-900">$45,280</p>
+                </div>
+                <div class="flex items-center mt-2">
+                    <svg class="w-4 h-4 text-primary-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                    <span class="text-xs text-primary-600">+12.5% from last month</span>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-red">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-warning-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-warning-600">Pending</span>
+                </div>
+                <h3 class="text-sm text-warning-700 mb-1">Pending Claims</h3>
+                <div class="flex items-baseline">
+                    <p class="text-3xl font-bold text-warning-900">23</p>
+                    <span class="ml-2 text-sm text-warning-600">claims</span>
+                </div>
+                <p class="text-xs text-warning-600 mt-2">Worth $8,450</p>
+            </div>
+
+            <div class="kpi-card kpi-card-green">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-success-500 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-success-600">This Month</span>
+                </div>
+                <h3 class="text-sm text-success-700 mb-1">Approved Claims</h3>
+                <div class="flex items-baseline">
+                    <p class="text-3xl font-bold text-success-900">87</p>
+                    <span class="ml-2 text-sm text-success-600">claims</span>
+                </div>
+                <p class="text-xs text-success-600 mt-2">Worth $32,150</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">Average</span>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Avg. Claim Value</h3>
+                <div class="flex items-baseline">
+                    <p class="text-3xl font-bold text-gray-900">$411</p>
+                </div>
+                <p class="text-xs text-gray-600 mt-2">Per claim</p>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <!-- Expense Trends Chart -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Expense Trends</h3>
+                    <select class="text-sm border border-gray-300 rounded-lg px-3 py-1">
+                        <option>Last 6 Months</option>
+                        <option>Last 12 Months</option>
+                        <option>This Year</option>
+                    </select>
+                </div>
+                <canvas id="expenseTrendsChart" height="250"></canvas>
+            </div>
+
+            <!-- Expense by Category Chart -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Expense by Category</h3>
+                    <select class="text-sm border border-gray-300 rounded-lg px-3 py-1">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>This Quarter</option>
+                    </select>
+                </div>
+                <canvas id="expenseCategoryChart" height="250"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Claims & Top Spenders -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Recent Claims -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Recent Claims</h3>
+                    <a href="/pages/expenses/expense-claims.html" class="text-sm text-primary-600 hover:text-primary-700 font-medium">View All</a>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+                                 alt="Employee" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">Robert Allen</p>
+                                <p class="text-xs text-gray-600">Travel - Client Meeting NYC</p>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-gray-900">$1,245</p>
+                            <span class="badge badge-warning text-xs">Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" 
+                                 alt="Employee" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">Sarah Johnson</p>
+                                <p class="text-xs text-gray-600">Office Supplies</p>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-gray-900">$342</p>
+                            <span class="badge badge-success text-xs">Approved</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" 
+                                 alt="Employee" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">Michael Chen</p>
+                                <p class="text-xs text-gray-600">Meals & Entertainment</p>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-gray-900">$89</p>
+                            <span class="badge badge-warning text-xs">Pending</span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" 
+                                 alt="Employee" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-900">Emily Davis</p>
+                                <p class="text-xs text-gray-600">Software Subscription</p>
+                            </div>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-gray-900">$499</p>
+                            <span class="badge badge-success text-xs">Approved</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Spenders & Budget Status -->
+            <div class="space-y-6">
+                <!-- Top Spenders -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Top Spenders (This Month)</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="flex items-center flex-1">
+                                <span class="text-lg font-bold text-gray-900 w-6">1</span>
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+                                     alt="Employee" 
+                                     class="w-8 h-8 rounded-full object-cover mx-3">
+                                <span class="text-sm font-medium text-gray-900">Robert Allen</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$4,567</span>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="flex items-center flex-1">
+                                <span class="text-lg font-bold text-gray-900 w-6">2</span>
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" 
+                                     alt="Employee" 
+                                     class="w-8 h-8 rounded-full object-cover mx-3">
+                                <span class="text-sm font-medium text-gray-900">Michael Chen</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$3,892</span>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="flex items-center flex-1">
+                                <span class="text-lg font-bold text-gray-900 w-6">3</span>
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" 
+                                     alt="Employee" 
+                                     class="w-8 h-8 rounded-full object-cover mx-3">
+                                <span class="text-sm font-medium text-gray-900">Sarah Johnson</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$2,934</span>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="flex items-center flex-1">
+                                <span class="text-lg font-bold text-gray-900 w-6">4</span>
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" 
+                                     alt="Employee" 
+                                     class="w-8 h-8 rounded-full object-cover mx-3">
+                                <span class="text-sm font-medium text-gray-900">Emily Davis</span>
+                            </div>
+                            <span class="text-sm font-bold text-gray-900">$2,156</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Status -->
+                <div class="card">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Budget Status</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-700">Travel</span>
+                                <span class="text-sm font-medium text-gray-900">$18,500 / $25,000</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-success-500 rounded-full" style="width: 74%"></div>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">74% used • $6,500 remaining</p>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-700">Office Supplies</span>
+                                <span class="text-sm font-medium text-gray-900">$4,200 / $5,000</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-warning-500 rounded-full" style="width: 84%"></div>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">84% used • $800 remaining</p>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-gray-700">Marketing</span>
+                                <span class="text-sm font-medium text-gray-900">$9,500 / $10,000</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                                <div class="h-full bg-error-500 rounded-full" style="width: 95%"></div>
+                            </div>
+                            <p class="text-xs text-error-600 mt-1">95% used • $500 remaining</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script>
+        // Expense Trends Chart
+        const expenseTrendsCtx = document.getElementById('expenseTrendsChart').getContext('2d');
+        new Chart(expenseTrendsCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                datasets: [{
+                    label: 'Total Expenses',
+                    data: [38500, 42300, 39800, 41200, 40250, 45280],
+                    borderColor: '#6366f1',
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return '$' + value.toLocaleString();
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Expense Category Chart
+        const expenseCategoryCtx = document.getElementById('expenseCategoryChart').getContext('2d');
+        new Chart(expenseCategoryCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Travel', 'Office Supplies', 'Marketing', 'Meals', 'Software', 'Other'],
+                datasets: [{
+                    data: [18500, 4200, 9500, 5600, 4800, 2680],
+                    backgroundColor: [
+                        '#6366f1',
+                        '#10b981',
+                        '#f59e0b',
+                        '#ef4444',
+                        '#8b5cf6',
+                        '#6b7280'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Reports - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Expense Reports</h1>
+            <div class="flex space-x-3">
+                <button class="btn-secondary">Export PDF</button>
+                <button class="btn-secondary">Export Excel</button>
+                <button class="btn-primary">Generate Report</button>
+            </div>
+        </div>
+
+        <!-- Report Filters -->
+        <div class="card mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Report Filters</h3>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Date Range</label>
+                    <select class="form-input">
+                        <option>Last 7 Days</option>
+                        <option>Last 30 Days</option>
+                        <option selected>Last 3 Months</option>
+                        <option>Last 6 Months</option>
+                        <option>This Year</option>
+                        <option>Custom Range</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                    <select class="form-input">
+                        <option selected>All Departments</option>
+                        <option>Human Resources</option>
+                        <option>Information Technology</option>
+                        <option>Sales</option>
+                        <option>Marketing</option>
+                        <option>Finance</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                    <select class="form-input">
+                        <option selected>All Categories</option>
+                        <option>Travel</option>
+                        <option>Meals</option>
+                        <option>Transportation</option>
+                        <option>Office Supplies</option>
+                        <option>Software</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                    <select class="form-input">
+                        <option selected>All Status</option>
+                        <option>Pending</option>
+                        <option>Approved</option>
+                        <option>Rejected</option>
+                        <option>Reimbursed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="mt-4 flex justify-end">
+                <button class="btn-primary">Apply Filters</button>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="kpi-card kpi-card-purple">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-primary-700">Total Expenses</p>
+                        <p class="text-3xl font-bold text-primary-900 mt-2">$127.5K</p>
+                        <p class="text-sm text-gray-600 mt-1">Last 3 months</p>
+                    </div>
+                    <div class="bg-primary-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-green">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-success-700">Approved</p>
+                        <p class="text-3xl font-bold text-success-900 mt-2">$98.2K</p>
+                        <p class="text-sm text-gray-600 mt-1">77% of total</p>
+                    </div>
+                    <div class="bg-success-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-success-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-orange">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-warning-700">Pending</p>
+                        <p class="text-3xl font-bold text-warning-900 mt-2">$24.8K</p>
+                        <p class="text-sm text-gray-600 mt-1">19% of total</p>
+                    </div>
+                    <div class="bg-warning-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-warning-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-red">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-error-700">Rejected</p>
+                        <p class="text-3xl font-bold text-error-900 mt-2">$4.5K</p>
+                        <p class="text-sm text-gray-600 mt-1">4% of total</p>
+                    </div>
+                    <div class="bg-error-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-error-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expenses by Category -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Expenses by Category</h3>
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Travel</span>
+                            <span class="text-sm font-bold text-gray-900">$48,250 (38%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 38%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Meals & Entertainment</span>
+                            <span class="text-sm font-bold text-gray-900">$32,125 (25%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-success-600 h-2 rounded-full" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Transportation</span>
+                            <span class="text-sm font-bold text-gray-900">$19,875 (16%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-warning-600 h-2 rounded-full" style="width: 16%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Office Supplies</span>
+                            <span class="text-sm font-bold text-gray-900">$15,300 (12%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 12%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Software & Tools</span>
+                            <span class="text-sm font-bold text-gray-900">$8,925 (7%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-purple-600 h-2 rounded-full" style="width: 7%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Other</span>
+                            <span class="text-sm font-bold text-gray-900">$3,025 (2%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 2%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Expenses by Department</h3>
+                <div class="space-y-3">
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Sales</span>
+                            <span class="text-sm font-bold text-gray-900">$45,900 (36%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-primary-600 h-2 rounded-full" style="width: 36%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Marketing</span>
+                            <span class="text-sm font-bold text-gray-900">$38,250 (30%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-success-600 h-2 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Information Technology</span>
+                            <span class="text-sm font-bold text-gray-900">$25,500 (20%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-warning-600 h-2 rounded-full" style="width: 20%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Human Resources</span>
+                            <span class="text-sm font-bold text-gray-900">$11,475 (9%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 9%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-sm font-medium text-gray-700">Finance</span>
+                            <span class="text-sm font-bold text-gray-900">$6,375 (5%)</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-purple-600 h-2 rounded-full" style="width: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Spenders -->
+        <div class="card mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Top Spenders</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">Rank</th>
+                            <th class="table-header">Employee</th>
+                            <th class="table-header">Department</th>
+                            <th class="table-header">Total Claims</th>
+                            <th class="table-header">Total Amount</th>
+                            <th class="table-header">Approved</th>
+                            <th class="table-header">Pending</th>
+                            <th class="table-header">Rejected</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <span class="flex items-center justify-center w-8 h-8 bg-yellow-100 text-yellow-800 rounded-full font-bold">1</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=John+Smith&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-medium">John Smith</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Sales</td>
+                            <td class="table-cell">24</td>
+                            <td class="table-cell font-semibold">$12,450</td>
+                            <td class="table-cell text-success-600">$10,200</td>
+                            <td class="table-cell text-warning-600">$2,250</td>
+                            <td class="table-cell text-error-600">$0</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <span class="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-800 rounded-full font-bold">2</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-medium">Sarah Johnson</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Marketing</td>
+                            <td class="table-cell">18</td>
+                            <td class="table-cell font-semibold">$9,875</td>
+                            <td class="table-cell text-success-600">$8,500</td>
+                            <td class="table-cell text-warning-600">$1,375</td>
+                            <td class="table-cell text-error-600">$0</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <span class="flex items-center justify-center w-8 h-8 bg-orange-100 text-orange-800 rounded-full font-bold">3</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Mike+Davis&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-medium">Mike Davis</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Sales</td>
+                            <td class="table-cell">16</td>
+                            <td class="table-cell font-semibold">$8,250</td>
+                            <td class="table-cell text-success-600">$7,100</td>
+                            <td class="table-cell text-warning-600">$1,150</td>
+                            <td class="table-cell text-error-600">$0</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <span class="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-600 rounded-full">4</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=Emily+Brown&background=ec4899&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-medium">Emily Brown</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Information Technology</td>
+                            <td class="table-cell">15</td>
+                            <td class="table-cell font-semibold">$7,650</td>
+                            <td class="table-cell text-success-600">$6,900</td>
+                            <td class="table-cell text-warning-600">$750</td>
+                            <td class="table-cell text-error-600">$0</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <span class="flex items-center justify-center w-8 h-8 bg-gray-100 text-gray-600 rounded-full">5</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://ui-avatars.com/api/?name=David+Wilson&background=3b82f6&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                    <span class="font-medium">David Wilson</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Marketing</td>
+                            <td class="table-cell">12</td>
+                            <td class="table-cell font-semibold">$6,480</td>
+                            <td class="table-cell text-success-600">$5,200</td>
+                            <td class="table-cell text-warning-600">$1,280</td>
+                            <td class="table-cell text-error-600">$0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Monthly Trend -->
+        <div class="card">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Monthly Expense Trend</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">Month</th>
+                            <th class="table-header">Total Claims</th>
+                            <th class="table-header">Total Amount</th>
+                            <th class="table-header">Approved</th>
+                            <th class="table-header">Pending</th>
+                            <th class="table-header">Rejected</th>
+                            <th class="table-header">Avg per Claim</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">January 2025</td>
+                            <td class="table-cell">156</td>
+                            <td class="table-cell font-semibold">$45,200</td>
+                            <td class="table-cell text-success-600">$34,500</td>
+                            <td class="table-cell text-warning-600">$9,200</td>
+                            <td class="table-cell text-error-600">$1,500</td>
+                            <td class="table-cell">$290</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">December 2024</td>
+                            <td class="table-cell">142</td>
+                            <td class="table-cell font-semibold">$41,750</td>
+                            <td class="table-cell text-success-600">$32,100</td>
+                            <td class="table-cell text-warning-600">$8,150</td>
+                            <td class="table-cell text-error-600">$1,500</td>
+                            <td class="table-cell">$294</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">November 2024</td>
+                            <td class="table-cell">138</td>
+                            <td class="table-cell font-semibold">$40,550</td>
+                            <td class="table-cell text-success-600">$31,600</td>
+                            <td class="table-cell text-warning-600">$7,450</td>
+                            <td class="table-cell text-error-600">$1,500</td>
+                            <td class="table-cell">$294</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

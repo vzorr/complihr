@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Payslips - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ showPayslipModal: false, selectedPayslip: null }">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">My Payslips</h1>
+                <p class="text-gray-600 mt-1">View and download your salary statements</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <select class="form-input">
+                    <option selected>2025</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                </select>
+                <button class="btn-secondary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Download All
+                </button>
+            </div>
+        </div>
+
+        <!-- Current Salary Summary -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-semibold text-gray-900">Current Salary Summary</h3>
+                <span class="text-sm text-gray-600">Last updated: Nov 1, 2025</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                    <p class="text-sm text-gray-600 mb-1">Base Salary</p>
+                    <p class="text-2xl font-bold text-gray-900">$8,500</p>
+                    <p class="text-xs text-gray-500 mt-1">Monthly</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 mb-1">Total Allowances</p>
+                    <p class="text-2xl font-bold text-success-600">+$1,200</p>
+                    <p class="text-xs text-gray-500 mt-1">Benefits & bonuses</p>
+                </div>
+                <div>
+                    <p class="text-sm text-gray-600 mb-1">Total Deductions</p>
+                    <p class="text-2xl font-bold text-error-600">-$2,150</p>
+                    <p class="text-xs text-gray-500 mt-1">Taxes & insurance</p>
+                </div>
+                <div class="bg-primary-50 rounded-lg p-4">
+                    <p class="text-sm text-primary-700 mb-1">Net Pay</p>
+                    <p class="text-2xl font-bold text-primary-900">$7,550</p>
+                    <p class="text-xs text-primary-600 mt-1">Take-home amount</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year-to-Date Earnings -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">2025 YTD</span>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Gross Income</h3>
+                <p class="text-3xl font-bold text-gray-900">$106,700</p>
+                <p class="text-xs text-gray-600 mt-2">11 months • Average: $9,700/mo</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">2025 YTD</span>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Total Deductions</h3>
+                <p class="text-3xl font-bold text-gray-900">$23,650</p>
+                <p class="text-xs text-gray-600 mt-2">22.2% of gross income</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                    <span class="text-xs font-medium text-gray-600">2025 YTD</span>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Net Income</h3>
+                <p class="text-3xl font-bold text-gray-900">$83,050</p>
+                <p class="text-xs text-gray-600 mt-2">77.8% of gross income</p>
+            </div>
+        </div>
+
+        <!-- Payslips List -->
+        <div class="card">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Payslip History</h3>
+
+            <div class="space-y-3">
+                <!-- November 2025 Payslip -->
+                <div class="flex items-center justify-between p-4 bg-primary-50 border border-primary-200 rounded-lg">
+                    <div class="flex items-center flex-1">
+                        <div class="w-12 h-12 bg-primary-500 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <h4 class="text-sm font-semibold text-gray-900">November 2025</h4>
+                                <span class="badge badge-success">Paid</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-sm">
+                                <div>
+                                    <p class="text-xs text-gray-600">Gross Pay</p>
+                                    <p class="font-medium text-gray-900">$9,700</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Deductions</p>
+                                    <p class="font-medium text-error-600">-$2,150</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Net Pay</p>
+                                    <p class="font-medium text-success-600">$7,550</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Payment Date</p>
+                                    <p class="font-medium text-gray-900">Nov 30, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 ml-4">
+                        <button @click="showPayslipModal = true; selectedPayslip = 'november'" class="btn-primary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            View
+                        </button>
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- October 2025 Payslip -->
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="flex items-center flex-1">
+                        <div class="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <h4 class="text-sm font-semibold text-gray-900">October 2025</h4>
+                                <span class="badge badge-success">Paid</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-sm">
+                                <div>
+                                    <p class="text-xs text-gray-600">Gross Pay</p>
+                                    <p class="font-medium text-gray-900">$9,700</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Deductions</p>
+                                    <p class="font-medium text-error-600">-$2,150</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Net Pay</p>
+                                    <p class="font-medium text-success-600">$7,550</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Payment Date</p>
+                                    <p class="font-medium text-gray-900">Oct 31, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 ml-4">
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            View
+                        </button>
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- September 2025 Payslip -->
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                    <div class="flex items-center flex-1">
+                        <div class="w-12 h-12 bg-gray-300 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <h4 class="text-sm font-semibold text-gray-900">September 2025</h4>
+                                <span class="badge badge-success">Paid</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-4 text-sm">
+                                <div>
+                                    <p class="text-xs text-gray-600">Gross Pay</p>
+                                    <p class="font-medium text-gray-900">$9,700</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Deductions</p>
+                                    <p class="font-medium text-error-600">-$2,150</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Net Pay</p>
+                                    <p class="font-medium text-success-600">$7,550</p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600">Payment Date</p>
+                                    <p class="font-medium text-gray-900">Sep 30, 2025</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 ml-4">
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                            </svg>
+                            View
+                        </button>
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- More months... -->
+                <button class="w-full py-3 text-sm text-primary-600 hover:text-primary-700 font-medium border-t border-gray-200">
+                    Load More Payslips
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Payslip Detail Modal -->
+    <div x-show="showPayslipModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" x-cloak>
+        <div @click.away="showPayslipModal = false" class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900">Payslip Details</h3>
+                        <p class="text-sm text-gray-600 mt-1">November 2025</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="btn-secondary btn-sm">
+                            <svg class="w-4 h-4 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download PDF
+                        </button>
+                        <button @click="showPayslipModal = false" class="text-gray-400 hover:text-gray-600">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <!-- Company & Employee Info -->
+                <div class="grid grid-cols-2 gap-6 mb-6 pb-6 border-b border-gray-200">
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Company Information</h4>
+                        <div class="space-y-2 text-sm">
+                            <p class="text-gray-900 font-medium">CompliHR Inc.</p>
+                            <p class="text-gray-600">123 Business Avenue</p>
+                            <p class="text-gray-600">New York, NY 10001</p>
+                            <p class="text-gray-600">Tax ID: 12-3456789</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Employee Information</h4>
+                        <div class="space-y-2 text-sm">
+                            <p class="text-gray-900 font-medium">Robert Allen</p>
+                            <p class="text-gray-600">Employee ID: EMP-001</p>
+                            <p class="text-gray-600">Department: Human Resources</p>
+                            <p class="text-gray-600">Position: HR Manager</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Salary Breakdown -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-4">Earnings</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Base Salary</span>
+                            <span class="text-sm font-medium text-gray-900">$8,500.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Housing Allowance</span>
+                            <span class="text-sm font-medium text-gray-900">$800.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Transportation Allowance</span>
+                            <span class="text-sm font-medium text-gray-900">$200.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Performance Bonus</span>
+                            <span class="text-sm font-medium text-gray-900">$200.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 bg-success-50 px-4 rounded-lg">
+                            <span class="text-sm font-semibold text-success-900">Total Earnings</span>
+                            <span class="text-lg font-bold text-success-900">$9,700.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deductions -->
+                <div class="mb-6">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-4">Deductions</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Federal Tax</span>
+                            <span class="text-sm font-medium text-error-600">-$1,450.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">State Tax</span>
+                            <span class="text-sm font-medium text-error-600">-$350.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Social Security</span>
+                            <span class="text-sm font-medium text-error-600">-$200.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-2 border-b border-gray-100">
+                            <span class="text-sm text-gray-700">Health Insurance</span>
+                            <span class="text-sm font-medium text-error-600">-$150.00</span>
+                        </div>
+                        <div class="flex items-center justify-between py-3 bg-error-50 px-4 rounded-lg">
+                            <span class="text-sm font-semibold text-error-900">Total Deductions</span>
+                            <span class="text-lg font-bold text-error-900">-$2,150.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Net Pay -->
+                <div class="p-6 bg-primary-50 border-2 border-primary-200 rounded-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm text-primary-700 mb-1">Net Pay</p>
+                            <p class="text-xs text-primary-600">Amount to be credited on Nov 30, 2025</p>
+                        </div>
+                        <p class="text-3xl font-bold text-primary-900">$7,550.00</p>
+                    </div>
+                </div>
+
+                <!-- Payment Information -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <h4 class="text-sm font-semibold text-gray-900 mb-4">Payment Information</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-gray-600">Payment Method</p>
+                            <p class="font-medium text-gray-900">Bank Transfer</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Bank Account</p>
+                            <p class="font-medium text-gray-900">****5678</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Payment Date</p>
+                            <p class="font-medium text-gray-900">November 30, 2025</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-600">Payment Status</p>
+                            <span class="badge badge-success">Processed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Note -->
+                <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                    <p class="text-xs text-gray-600">
+                        <strong>Note:</strong> This is a computer-generated payslip and does not require a signature. 
+                        For any queries regarding your salary, please contact the HR department at hr@complihr.com or call ext. 1234.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+</body>
+</html>

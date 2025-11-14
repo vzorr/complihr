@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Payroll - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Run Payroll</h1>
+            <a href="/pages/payroll/payroll-history.html" class="btn-secondary">View History</a>
+        </div>
+
+        <!-- Current Payroll Cycle -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Current Payroll Cycle</h3>
+                    <p class="text-gray-600">January 2025 - Monthly Cycle</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-sm text-gray-600">Pay Period</p>
+                    <p class="text-lg font-semibold text-gray-900">Jan 1 - Jan 31, 2025</p>
+                    <p class="text-sm text-gray-600 mt-1">Pay Date: <span class="font-medium text-primary-600">February 5, 2025</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payroll Summary -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="kpi-card kpi-card-purple">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-primary-700">Total Employees</p>
+                        <p class="text-3xl font-bold text-primary-900 mt-2">145</p>
+                    </div>
+                    <div class="bg-primary-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-green">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-success-700">Gross Salary</p>
+                        <p class="text-3xl font-bold text-success-900 mt-2">$1.2M</p>
+                    </div>
+                    <div class="bg-success-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-success-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-orange">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-warning-700">Deductions</p>
+                        <p class="text-3xl font-bold text-warning-900 mt-2">$185K</p>
+                    </div>
+                    <div class="bg-warning-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-warning-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-red">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-error-700">Net Payable</p>
+                        <p class="text-3xl font-bold text-error-900 mt-2">$1.01M</p>
+                    </div>
+                    <div class="bg-error-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-error-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pre-Payroll Checklist -->
+        <div class="card mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Pre-Payroll Checklist</h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-success-50 rounded-lg border border-success-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-success-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Attendance Data Verified</p>
+                            <p class="text-sm text-gray-600">All employee attendance records for January 2025</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-success">Complete</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-success-50 rounded-lg border border-success-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-success-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Leave Applications Processed</p>
+                            <p class="text-sm text-gray-600">45 leave applications approved and updated</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-success">Complete</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-success-50 rounded-lg border border-success-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-success-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Overtime Hours Calculated</p>
+                            <p class="text-sm text-gray-600">328 overtime hours across all departments</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-success">Complete</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-success-50 rounded-lg border border-success-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-success-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Tax Calculations Updated</p>
+                            <p class="text-sm text-gray-600">All federal and state tax rates applied</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-success">Complete</span>
+                </div>
+
+                <div class="flex items-center justify-between p-3 bg-success-50 rounded-lg border border-success-200">
+                    <div class="flex items-center">
+                        <svg class="w-5 h-5 text-success-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-gray-900">Bank Account Details Verified</p>
+                            <p class="text-sm text-gray-600">All 145 employee bank accounts validated</p>
+                        </div>
+                    </div>
+                    <span class="badge badge-success">Complete</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payroll Breakdown -->
+        <div class="card mb-6">
+            <h3 class="text-lg font-semibold text-gray-900 mb-4">Payroll Breakdown by Department</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">Department</th>
+                            <th class="table-header">Employees</th>
+                            <th class="table-header">Gross Salary</th>
+                            <th class="table-header">Tax Deductions</th>
+                            <th class="table-header">Other Deductions</th>
+                            <th class="table-header">Net Payable</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">Human Resources</td>
+                            <td class="table-cell">25</td>
+                            <td class="table-cell">$210,000</td>
+                            <td class="table-cell text-error-600">-$31,500</td>
+                            <td class="table-cell text-error-600">-$8,400</td>
+                            <td class="table-cell font-semibold text-success-600">$170,100</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">Information Technology</td>
+                            <td class="table-cell">45</td>
+                            <td class="table-cell">$450,000</td>
+                            <td class="table-cell text-error-600">-$67,500</td>
+                            <td class="table-cell text-error-600">-$18,000</td>
+                            <td class="table-cell font-semibold text-success-600">$364,500</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">Sales</td>
+                            <td class="table-cell">35</td>
+                            <td class="table-cell">$315,000</td>
+                            <td class="table-cell text-error-600">-$47,250</td>
+                            <td class="table-cell text-error-600">-$12,600</td>
+                            <td class="table-cell font-semibold text-success-600">$255,150</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">Marketing</td>
+                            <td class="table-cell">20</td>
+                            <td class="table-cell">$160,000</td>
+                            <td class="table-cell text-error-600">-$24,000</td>
+                            <td class="table-cell text-error-600">-$6,400</td>
+                            <td class="table-cell font-semibold text-success-600">$129,600</td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell font-medium">Finance</td>
+                            <td class="table-cell">20</td>
+                            <td class="table-cell">$180,000</td>
+                            <td class="table-cell text-error-600">-$27,000</td>
+                            <td class="table-cell text-error-600">-$7,200</td>
+                            <td class="table-cell font-semibold text-success-600">$145,800</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-gray-50 font-bold">
+                        <tr>
+                            <td class="table-cell">Total</td>
+                            <td class="table-cell">145</td>
+                            <td class="table-cell">$1,215,000</td>
+                            <td class="table-cell text-error-600">-$197,250</td>
+                            <td class="table-cell text-error-600">-$52,600</td>
+                            <td class="table-cell text-success-600">$965,150</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-1">Ready to Process</h3>
+                    <p class="text-sm text-gray-600">All pre-payroll checks have been completed. You can now process the payroll.</p>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <button class="btn-secondary">Preview Payslips</button>
+                    <button class="btn-primary" onclick="if(confirm('Are you sure you want to process payroll for 145 employees totaling $965,150?')) { alert('Payroll processing initiated! This may take a few minutes.'); }">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Process Payroll
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Notes -->
+        <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-start">
+                <svg class="w-5 h-5 text-blue-600 mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                    <h4 class="text-sm font-semibold text-blue-900 mb-1">Important Information</h4>
+                    <ul class="text-sm text-blue-800 space-y-1">
+                        <li>• Once processed, payroll cannot be reversed. Please review all details carefully.</li>
+                        <li>• Bank transfers will be initiated immediately and typically complete within 1-2 business days.</li>
+                        <li>• All employees will receive email notifications with their payslips.</li>
+                        <li>• Tax reports will be automatically generated and available for download after processing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

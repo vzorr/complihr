@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Edit Profile</h1>
+                <p class="text-gray-600 mt-1">Update your personal information</p>
+            </div>
+            <a href="/pages/profile/user-profile.html" class="btn-secondary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Back to Profile
+            </a>
+        </div>
+
+        <!-- Edit Form -->
+        <form class="space-y-6">
+            <!-- Personal Information -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Personal Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name *</label>
+                        <input type="text" class="form-input" value="Robert" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name *</label>
+                        <input type="text" class="form-input" value="Allen" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
+                        <input type="email" class="form-input" value="robert.allen@complihr.com" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                        <input type="tel" class="form-input" value="+1 (555) 123-4567" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                        <input type="date" class="form-input" value="1985-06-15">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                        <select class="form-input">
+                            <option value="">Select Gender</option>
+                            <option value="male" selected>Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                            <option value="prefer-not-to-say">Prefer not to say</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Marital Status</label>
+                        <select class="form-input">
+                            <option value="">Select Status</option>
+                            <option value="single">Single</option>
+                            <option value="married" selected>Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="widowed">Widowed</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
+                        <input type="text" class="form-input" value="American">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Contact Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Address Line 1 *</label>
+                        <input type="text" class="form-input" value="123 Main Street" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Address Line 2</label>
+                        <input type="text" class="form-input" value="Apt 4B">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">City *</label>
+                        <input type="text" class="form-input" value="New York" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">State/Province *</label>
+                        <input type="text" class="form-input" value="New York" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">ZIP/Postal Code *</label>
+                        <input type="text" class="form-input" value="10001" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Country *</label>
+                        <select class="form-input" required>
+                            <option value="">Select Country</option>
+                            <option value="us" selected>United States</option>
+                            <option value="uk">United Kingdom</option>
+                            <option value="ca">Canada</option>
+                            <option value="au">Australia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Emergency Contact -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Emergency Contact</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Contact Name *</label>
+                        <input type="text" class="form-input" value="Jane Allen" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Relationship *</label>
+                        <input type="text" class="form-input" value="Spouse" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
+                        <input type="tel" class="form-input" value="+1 (555) 987-6543" required>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                        <input type="email" class="form-input" value="jane.allen@email.com">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employment Information -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Employment Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Employee ID</label>
+                        <input type="text" class="form-input" value="EMP-001" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+                        <input type="text" class="form-input" value="HR Manager" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Department</label>
+                        <input type="text" class="form-input" value="Human Resources" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Joining Date</label>
+                        <input type="date" class="form-input" value="2020-01-15" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Work Location</label>
+                        <input type="text" class="form-input" value="New York Office" disabled>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Employment Type</label>
+                        <input type="text" class="form-input" value="Full-Time" disabled>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Employment information can only be updated by HR administrators
+                </p>
+            </div>
+
+            <!-- Social Links -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">Social Links (Optional)</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn Profile</label>
+                        <input type="url" class="form-input" placeholder="https://linkedin.com/in/yourprofile">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Twitter/X</label>
+                        <input type="url" class="form-input" placeholder="https://twitter.com/yourhandle">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bio -->
+            <div class="card">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4">About Me</h2>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Bio</label>
+                    <textarea class="form-input" rows="4" placeholder="Tell us about yourself...">Experienced HR Manager with over 10 years in talent acquisition, employee relations, and organizational development. Passionate about creating inclusive workplace cultures.</textarea>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="card">
+                <div class="flex items-center justify-end space-x-3">
+                    <a href="/pages/profile/user-profile.html" class="btn-secondary">Cancel</a>
+                    <button type="submit" class="btn-primary">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        Save Changes
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

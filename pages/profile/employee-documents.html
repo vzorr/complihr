@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Documents - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ showUploadModal: false, selectedCategory: 'all' }">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">My Documents</h1>
+                <p class="text-gray-600 mt-1">Manage your personal and employment documents</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button @click="showUploadModal = true" class="btn-primary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                    Upload Document
+                </button>
+            </div>
+        </div>
+
+        <!-- Storage Usage -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h3 class="text-sm font-medium text-gray-900">Storage Usage</h3>
+                    <p class="text-sm text-gray-600 mt-1">12.5 MB of 100 MB used</p>
+                </div>
+                <span class="text-sm font-medium text-gray-900">12.5%</span>
+            </div>
+            <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="h-full bg-primary-500 rounded-full" style="width: 12.5%"></div>
+            </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="card mb-6">
+            <div class="flex items-center space-x-2 overflow-x-auto pb-2">
+                <button 
+                    @click="selectedCategory = 'all'"
+                    :class="selectedCategory === 'all' ? 'bg-primary-100 text-primary-700 border-primary-300' : 'bg-white text-gray-700 border-gray-300'"
+                    class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50 transition-colors">
+                    All Documents
+                </button>
+                <button 
+                    @click="selectedCategory = 'personal'"
+                    :class="selectedCategory === 'personal' ? 'bg-primary-100 text-primary-700 border-primary-300' : 'bg-white text-gray-700 border-gray-300'"
+                    class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50 transition-colors">
+                    Personal
+                </button>
+                <button 
+                    @click="selectedCategory = 'employment'"
+                    :class="selectedCategory === 'employment' ? 'bg-primary-100 text-primary-700 border-primary-300' : 'bg-white text-gray-700 border-gray-300'"
+                    class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50 transition-colors">
+                    Employment
+                </button>
+                <button 
+                    @click="selectedCategory = 'certificates'"
+                    :class="selectedCategory === 'certificates' ? 'bg-primary-100 text-primary-700 border-primary-300' : 'bg-white text-gray-700 border-gray-300'"
+                    class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50 transition-colors">
+                    Certificates
+                </button>
+                <button 
+                    @click="selectedCategory = 'compliance'"
+                    :class="selectedCategory === 'compliance' ? 'bg-primary-100 text-primary-700 border-primary-300' : 'bg-white text-gray-700 border-gray-300'"
+                    class="px-4 py-2 border rounded-lg text-sm font-medium whitespace-nowrap hover:bg-gray-50 transition-colors">
+                    Compliance
+                </button>
+            </div>
+        </div>
+
+        <!-- Documents Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Personal Documents -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Personal Documents</h3>
+                    <span class="badge badge-primary">4 files</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-error-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Resume_2025.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 15, 2025 • 245 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <button class="text-gray-400 hover:text-gray-600" title="More options">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Passport_Scan.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Feb 10, 2024 • 1.8 MB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <button class="text-gray-400 hover:text-gray-600" title="More options">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Birth_Certificate.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 20, 2020 • 890 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <button class="text-gray-400 hover:text-gray-600" title="More options">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Employment Documents -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Employment Documents</h3>
+                    <span class="badge badge-primary">3 files</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Employment_Contract_2020.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 15, 2020 • 1.2 MB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <span class="badge badge-success text-xs">Verified</span>
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Offer_Letter.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Dec 20, 2019 • 456 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <span class="badge badge-success text-xs">Verified</span>
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-warning-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">NDA_Agreement.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 15, 2020 • 320 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <span class="badge badge-success text-xs">Verified</span>
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates & Training -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Certificates & Training</h3>
+                    <span class="badge badge-primary">5 files</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">HR_Professional_Certificate.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Mar 10, 2023 • 1.5 MB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <button class="text-gray-400 hover:text-gray-600" title="More options">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                                    <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Safety_Training_Certificate.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Oct 5, 2024 • 650 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                            <button class="text-gray-400 hover:text-gray-600" title="More options">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="w-full mt-3 text-sm text-primary-600 hover:text-primary-700 font-medium">
+                    View all certificates (3 more)
+                </button>
+            </div>
+
+            <!-- Compliance Documents -->
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Compliance Documents</h3>
+                    <span class="badge badge-primary">2 files</span>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-success-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Background_Check_2020.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 10, 2020 • 890 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <span class="badge badge-success text-xs">Verified</span>
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-sm font-medium text-gray-900 truncate">Code_of_Conduct_Signed.pdf</p>
+                                <p class="text-xs text-gray-500">Uploaded Jan 15, 2020 • 120 KB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2 ml-3">
+                            <span class="badge badge-success text-xs">Verified</span>
+                            <button class="text-primary-600 hover:text-primary-700" title="Download">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upload Modal -->
+    <div x-show="showUploadModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" x-cloak>
+        <div @click.away="showUploadModal = false" class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-gray-900">Upload Document</h3>
+                    <button @click="showUploadModal = false" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Document Category *</label>
+                        <select class="form-input">
+                            <option>Select category</option>
+                            <option>Personal Documents</option>
+                            <option>Employment Documents</option>
+                            <option>Certificates & Training</option>
+                            <option>Compliance Documents</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Document Title *</label>
+                        <input type="text" class="form-input" placeholder="Enter document title">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Upload File *</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-primary-500 transition-colors cursor-pointer">
+                            <svg class="w-12 h-12 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-sm text-gray-600 mb-2">Drop your file here or click to browse</p>
+                            <p class="text-xs text-gray-500">PDF, DOC, DOCX, JPG, PNG (Max 5MB)</p>
+                            <input type="file" class="hidden">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
+                        <textarea rows="3" class="form-input" placeholder="Add notes about this document"></textarea>
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+                        <button type="button" @click="showUploadModal = false" class="btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            Upload Document
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+</body>
+</html>

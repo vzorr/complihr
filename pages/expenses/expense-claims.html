@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Claims - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ selectedStatus: 'all', showClaimModal: false, selectedClaim: null }">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Expense Claims</h1>
+                <p class="text-gray-600 mt-1">Manage and track all expense claims</p>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button class="btn-secondary">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                    Export CSV
+                </button>
+                <button class="btn-primary" onclick="window.location.href='/pages/expenses/expense-claim-modal.html'">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Submit Claim
+                </button>
+            </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Total Claims</p>
+                        <p class="text-2xl font-bold text-gray-900">142</p>
+                    </div>
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Pending Review</p>
+                        <p class="text-2xl font-bold text-warning-600">23</p>
+                    </div>
+                    <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Approved</p>
+                        <p class="text-2xl font-bold text-success-600">87</p>
+                    </div>
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Rejected</p>
+                        <p class="text-2xl font-bold text-error-600">12</p>
+                    </div>
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Search</label>
+                    <input type="text" placeholder="Search claims..." class="form-input">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <select class="form-input" x-model="selectedStatus">
+                        <option value="all">All Status</option>
+                        <option value="pending">Pending</option>
+                        <option value="approved">Approved</option>
+                        <option value="rejected">Rejected</option>
+                        <option value="paid">Paid</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Category</label>
+                    <select class="form-input">
+                        <option>All Categories</option>
+                        <option>Travel</option>
+                        <option>Office Supplies</option>
+                        <option>Meals & Entertainment</option>
+                        <option>Software</option>
+                        <option>Marketing</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                    <select class="form-input">
+                        <option>This Month</option>
+                        <option>Last Month</option>
+                        <option>Last 3 Months</option>
+                        <option>This Year</option>
+                        <option>Custom Range</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Claims Table -->
+        <div class="card">
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header text-left">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </th>
+                            <th class="table-header text-left">Claim ID</th>
+                            <th class="table-header text-left">Employee</th>
+                            <th class="table-header text-left">Category</th>
+                            <th class="table-header text-left">Description</th>
+                            <th class="table-header text-left">Date</th>
+                            <th class="table-header text-right">Amount</th>
+                            <th class="table-header text-left">Status</th>
+                            <th class="table-header text-left">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <!-- Claim Row 1 -->
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </td>
+                            <td class="table-cell">
+                                <span class="text-primary-600 font-medium">#EXP-1245</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+                                         alt="Employee" 
+                                         class="w-8 h-8 rounded-full object-cover mr-2">
+                                    <span>Robert Allen</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Travel</td>
+                            <td class="table-cell">
+                                <div class="max-w-xs truncate">
+                                    Flight tickets to NYC for client meeting
+                                </div>
+                            </td>
+                            <td class="table-cell">Nov 15, 2025</td>
+                            <td class="table-cell text-right font-medium">$1,245.00</td>
+                            <td class="table-cell">
+                                <span class="badge badge-warning">Pending</span>
+                            </td>
+                            <td class="table-cell">
+                                <button @click="showClaimModal = true; selectedClaim = 1" class="text-primary-600 hover:text-primary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Claim Row 2 -->
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </td>
+                            <td class="table-cell">
+                                <span class="text-primary-600 font-medium">#EXP-1244</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop" 
+                                         alt="Employee" 
+                                         class="w-8 h-8 rounded-full object-cover mr-2">
+                                    <span>Sarah Johnson</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Office Supplies</td>
+                            <td class="table-cell">
+                                <div class="max-w-xs truncate">
+                                    Office furniture and stationery
+                                </div>
+                            </td>
+                            <td class="table-cell">Nov 14, 2025</td>
+                            <td class="table-cell text-right font-medium">$342.50</td>
+                            <td class="table-cell">
+                                <span class="badge badge-success">Approved</span>
+                            </td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Claim Row 3 -->
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </td>
+                            <td class="table-cell">
+                                <span class="text-primary-600 font-medium">#EXP-1243</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop" 
+                                         alt="Employee" 
+                                         class="w-8 h-8 rounded-full object-cover mr-2">
+                                    <span>Michael Chen</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Meals</td>
+                            <td class="table-cell">
+                                <div class="max-w-xs truncate">
+                                    Team lunch meeting
+                                </div>
+                            </td>
+                            <td class="table-cell">Nov 13, 2025</td>
+                            <td class="table-cell text-right font-medium">$89.00</td>
+                            <td class="table-cell">
+                                <span class="badge badge-warning">Pending</span>
+                            </td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Claim Row 4 -->
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </td>
+                            <td class="table-cell">
+                                <span class="text-primary-600 font-medium">#EXP-1242</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop" 
+                                         alt="Employee" 
+                                         class="w-8 h-8 rounded-full object-cover mr-2">
+                                    <span>Emily Davis</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Software</td>
+                            <td class="table-cell">
+                                <div class="max-w-xs truncate">
+                                    Adobe Creative Cloud subscription
+                                </div>
+                            </td>
+                            <td class="table-cell">Nov 12, 2025</td>
+                            <td class="table-cell text-right font-medium">$499.00</td>
+                            <td class="table-cell">
+                                <span class="badge badge-success">Approved</span>
+                            </td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Claim Row 5 -->
+                        <tr class="table-row">
+                            <td class="table-cell">
+                                <input type="checkbox" class="rounded border-gray-300">
+                            </td>
+                            <td class="table-cell">
+                                <span class="text-primary-600 font-medium">#EXP-1241</span>
+                            </td>
+                            <td class="table-cell">
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+                                         alt="Employee" 
+                                         class="w-8 h-8 rounded-full object-cover mr-2">
+                                    <span>Robert Allen</span>
+                                </div>
+                            </td>
+                            <td class="table-cell">Travel</td>
+                            <td class="table-cell">
+                                <div class="max-w-xs truncate">
+                                    Hotel accommodation - Boston
+                                </div>
+                            </td>
+                            <td class="table-cell">Nov 10, 2025</td>
+                            <td class="table-cell text-right font-medium">$678.00</td>
+                            <td class="table-cell">
+                                <span class="badge badge-error">Rejected</span>
+                            </td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-700">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="flex items-center justify-between px-6 py-4 border-t border-gray-200">
+                <div class="text-sm text-gray-600">
+                    Showing 1 to 10 of 142 claims
+                </div>
+                <div class="flex items-center space-x-2">
+                    <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50">
+                        Previous
+                    </button>
+                    <button class="px-3 py-1 bg-primary-500 text-white rounded">1</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50">2</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50">3</button>
+                    <button class="px-3 py-1 border border-gray-300 rounded hover:bg-gray-50">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Claim Detail Modal -->
+    <div x-show="showClaimModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" x-cloak>
+        <div @click.away="showClaimModal = false" class="bg-white rounded-lg shadow-xl max-w-3xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900">Claim Details</h3>
+                        <p class="text-sm text-gray-600 mt-1">#EXP-1245</p>
+                    </div>
+                    <button @click="showClaimModal = false" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <!-- Claim Information -->
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Employee</p>
+                        <div class="flex items-center">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop" 
+                                 alt="Employee" 
+                                 class="w-10 h-10 rounded-full object-cover mr-3">
+                            <div>
+                                <p class="font-medium text-gray-900">Robert Allen</p>
+                                <p class="text-sm text-gray-600">HR Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Status</p>
+                        <span class="badge badge-warning">Pending Review</span>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Category</p>
+                        <p class="font-medium text-gray-900">Travel</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Date</p>
+                        <p class="font-medium text-gray-900">November 15, 2025</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Amount</p>
+                        <p class="text-2xl font-bold text-gray-900">$1,245.00</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-600 mb-1">Submitted On</p>
+                        <p class="font-medium text-gray-900">November 15, 2025</p>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mb-6">
+                    <p class="text-sm text-gray-600 mb-2">Description</p>
+                    <p class="text-gray-900">Flight tickets to NYC for client meeting and project presentation. Round trip business class tickets.</p>
+                </div>
+
+                <!-- Attachments -->
+                <div class="mb-6">
+                    <p class="text-sm text-gray-600 mb-3">Attachments (2)</p>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <svg class="w-8 h-8 text-error-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">flight_receipt.pdf</p>
+                                    <p class="text-xs text-gray-600">245 KB</p>
+                                </div>
+                            </div>
+                            <button class="text-primary-600 hover:text-primary-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div class="flex items-center">
+                                <svg class="w-8 h-8 text-primary-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-900">boarding_pass.jpg</p>
+                                    <p class="text-xs text-gray-600">156 KB</p>
+                                </div>
+                            </div>
+                            <button class="text-primary-600 hover:text-primary-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="flex items-center justify-end space-x-3 pt-6 border-t border-gray-200">
+                    <button class="btn-secondary text-error-600 border-error-300 hover:bg-error-50">
+                        Reject
+                    </button>
+                    <button class="btn-primary">
+                        Approve Claim
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

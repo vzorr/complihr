@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timesheet - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <div class="flex items-center justify-between mb-6">
+            <h1 class="text-2xl font-bold text-gray-900">Timesheet</h1>
+            <div class="flex space-x-3">
+                <button class="btn-secondary">Export CSV</button>
+                <button class="btn-primary">Submit Timesheet</button>
+            </div>
+        </div>
+
+        <!-- Week Selector -->
+        <div class="card mb-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                    </button>
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-900">Week of Jan 15 - Jan 21, 2025</h3>
+                        <p class="text-sm text-gray-500">Total Hours: 40.0</p>
+                    </div>
+                    <button class="p-2 hover:bg-gray-100 rounded-lg">
+                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <span class="badge badge-success">Approved</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="kpi-card kpi-card-purple">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-primary-700">Regular Hours</p>
+                        <p class="text-3xl font-bold text-primary-900 mt-2">40.0</p>
+                    </div>
+                    <div class="bg-primary-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-primary-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-green">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-success-700">Overtime</p>
+                        <p class="text-3xl font-bold text-success-900 mt-2">2.5</p>
+                    </div>
+                    <div class="bg-success-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-success-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-orange">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-warning-700">Break Time</p>
+                        <p class="text-3xl font-bold text-warning-900 mt-2">4.0</p>
+                    </div>
+                    <div class="bg-warning-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-warning-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="kpi-card kpi-card-red">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-error-700">PTO Hours</p>
+                        <p class="text-3xl font-bold text-error-900 mt-2">8.0</p>
+                    </div>
+                    <div class="bg-error-200 p-3 rounded-lg">
+                        <svg class="w-8 h-8 text-error-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timesheet Table -->
+        <div class="card">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="table-header">Date</th>
+                            <th class="table-header">Day</th>
+                            <th class="table-header">Project</th>
+                            <th class="table-header">Task</th>
+                            <th class="table-header">Clock In</th>
+                            <th class="table-header">Clock Out</th>
+                            <th class="table-header">Break</th>
+                            <th class="table-header">Hours</th>
+                            <th class="table-header">Status</th>
+                            <th class="table-header">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        <tr class="table-row">
+                            <td class="table-cell">Jan 15</td>
+                            <td class="table-cell">Monday</td>
+                            <td class="table-cell">CompliHR Platform</td>
+                            <td class="table-cell">Frontend Development</td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:30 PM</td>
+                            <td class="table-cell">0.5h</td>
+                            <td class="table-cell font-semibold">8.0h</td>
+                            <td class="table-cell"><span class="badge badge-success">Approved</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-900">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Jan 16</td>
+                            <td class="table-cell">Tuesday</td>
+                            <td class="table-cell">CompliHR Platform</td>
+                            <td class="table-cell">API Integration</td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:30 PM</td>
+                            <td class="table-cell">0.5h</td>
+                            <td class="table-cell font-semibold">8.0h</td>
+                            <td class="table-cell"><span class="badge badge-success">Approved</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-900">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Jan 17</td>
+                            <td class="table-cell">Wednesday</td>
+                            <td class="table-cell">CompliHR Platform</td>
+                            <td class="table-cell">Bug Fixes</td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">06:00 PM</td>
+                            <td class="table-cell">0.5h</td>
+                            <td class="table-cell font-semibold">8.5h</td>
+                            <td class="table-cell"><span class="badge badge-warning">Pending</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-900">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Jan 18</td>
+                            <td class="table-cell">Thursday</td>
+                            <td class="table-cell">Client Portal</td>
+                            <td class="table-cell">Dashboard Design</td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:30 PM</td>
+                            <td class="table-cell">0.5h</td>
+                            <td class="table-cell font-semibold">8.0h</td>
+                            <td class="table-cell"><span class="badge badge-warning">Pending</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-900">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="table-row">
+                            <td class="table-cell">Jan 19</td>
+                            <td class="table-cell">Friday</td>
+                            <td class="table-cell">CompliHR Platform</td>
+                            <td class="table-cell">Testing</td>
+                            <td class="table-cell">09:00 AM</td>
+                            <td class="table-cell">05:30 PM</td>
+                            <td class="table-cell">0.5h</td>
+                            <td class="table-cell font-semibold">8.0h</td>
+                            <td class="table-cell"><span class="badge badge-warning">Pending</span></td>
+                            <td class="table-cell">
+                                <button class="text-primary-600 hover:text-primary-900">Edit</button>
+                            </td>
+                        </tr>
+                        <tr class="table-row bg-gray-50">
+                            <td class="table-cell">Jan 20</td>
+                            <td class="table-cell">Saturday</td>
+                            <td class="table-cell" colspan="6">Weekend</td>
+                            <td class="table-cell"><span class="badge badge-secondary">Non-Working</span></td>
+                            <td class="table-cell">-</td>
+                        </tr>
+                        <tr class="table-row bg-gray-50">
+                            <td class="table-cell">Jan 21</td>
+                            <td class="table-cell">Sunday</td>
+                            <td class="table-cell" colspan="6">Weekend</td>
+                            <td class="table-cell"><span class="badge badge-secondary">Non-Working</span></td>
+                            <td class="table-cell">-</td>
+                        </tr>
+                    </tbody>
+                    <tfoot class="bg-gray-50 font-semibold">
+                        <tr>
+                            <td colspan="7" class="table-cell text-right">Total Hours:</td>
+                            <td class="table-cell text-primary-600">40.5h</td>
+                            <td colspan="2" class="table-cell"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

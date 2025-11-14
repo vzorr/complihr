@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Payroll - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8" x-data="{ currentStep: 1, totalSteps: 4 }">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Process Payroll</h1>
+                <p class="text-gray-600 mt-1">November 2025 Payroll Cycle</p>
+            </div>
+            <button class="btn-secondary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Cancel Process
+            </button>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="card mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center flex-1" :class="currentStep >= 1 ? 'text-primary-600' : 'text-gray-400'">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full" :class="currentStep >= 1 ? 'bg-primary-600 text-white' : 'bg-gray-200'">
+                        <span x-show="currentStep > 1">✓</span>
+                        <span x-show="currentStep <= 1">1</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">Employee Selection</div>
+                        <div class="text-xs">Select employees to process</div>
+                    </div>
+                </div>
+
+                <div class="h-0.5 flex-1 mx-4" :class="currentStep >= 2 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+
+                <div class="flex items-center flex-1" :class="currentStep >= 2 ? 'text-primary-600' : 'text-gray-400'">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full" :class="currentStep >= 2 ? 'bg-primary-600 text-white' : 'bg-gray-200'">
+                        <span x-show="currentStep > 2">✓</span>
+                        <span x-show="currentStep <= 2">2</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">Salary Calculation</div>
+                        <div class="text-xs">Review salary details</div>
+                    </div>
+                </div>
+
+                <div class="h-0.5 flex-1 mx-4" :class="currentStep >= 3 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+
+                <div class="flex items-center flex-1" :class="currentStep >= 3 ? 'text-primary-600' : 'text-gray-400'">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full" :class="currentStep >= 3 ? 'bg-primary-600 text-white' : 'bg-gray-200'">
+                        <span x-show="currentStep > 3">✓</span>
+                        <span x-show="currentStep <= 3">3</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">Review & Approve</div>
+                        <div class="text-xs">Final verification</div>
+                    </div>
+                </div>
+
+                <div class="h-0.5 flex-1 mx-4" :class="currentStep >= 4 ? 'bg-primary-600' : 'bg-gray-200'"></div>
+
+                <div class="flex items-center flex-1" :class="currentStep >= 4 ? 'text-primary-600' : 'text-gray-400'">
+                    <div class="flex items-center justify-center w-10 h-10 rounded-full" :class="currentStep >= 4 ? 'bg-primary-600 text-white' : 'bg-gray-200'">
+                        <span>4</span>
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-sm font-medium">Process Payment</div>
+                        <div class="text-xs">Execute payroll</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 1: Employee Selection -->
+        <div x-show="currentStep === 1" class="space-y-6">
+            <div class="card">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900">Select Employees</h3>
+                    <div class="flex items-center space-x-3">
+                        <select class="form-input text-sm">
+                            <option>All Departments</option>
+                            <option>HR</option>
+                            <option>IT</option>
+                            <option>Sales</option>
+                        </select>
+                        <button class="btn-secondary btn-sm">
+                            <input type="checkbox" class="mr-2"> Select All (145)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="table-header w-12">
+                                    <input type="checkbox" class="rounded border-gray-300">
+                                </th>
+                                <th class="table-header">Employee</th>
+                                <th class="table-header">Department</th>
+                                <th class="table-header">Basic Salary</th>
+                                <th class="table-header">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <input type="checkbox" checked class="rounded border-gray-300">
+                                </td>
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Mark Williams</div>
+                                            <div class="text-xs text-gray-500">EMP-001234</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell">Human Resources</td>
+                                <td class="table-cell font-medium">$7,083</td>
+                                <td class="table-cell"><span class="badge badge-success">Active</span></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <input type="checkbox" checked class="rounded border-gray-300">
+                                </td>
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Floyd Miles</div>
+                                            <div class="text-xs text-gray-500">EMP-001235</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell">Information Technology</td>
+                                <td class="table-cell font-medium">$6,250</td>
+                                <td class="table-cell"><span class="badge badge-success">Active</span></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <input type="checkbox" checked class="rounded border-gray-300">
+                                </td>
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Cody Fisher</div>
+                                            <div class="text-xs text-gray-500">EMP-001236</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell">Sales</td>
+                                <td class="table-cell font-medium">$5,417</td>
+                                <td class="table-cell"><span class="badge badge-success">Active</span></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <input type="checkbox" class="rounded border-gray-300">
+                                </td>
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Dianne+Russell&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Dianne Russell</div>
+                                            <div class="text-xs text-gray-500">EMP-001237</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell">Sales</td>
+                                <td class="table-cell font-medium">$4,583</td>
+                                <td class="table-cell"><span class="badge badge-warning">On Leave</span></td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <input type="checkbox" checked class="rounded border-gray-300">
+                                </td>
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Savannah+Nguyen&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Savannah Nguyen</div>
+                                            <div class="text-xs text-gray-500">EMP-001238</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell">Design</td>
+                                <td class="table-cell font-medium">$5,833</td>
+                                <td class="table-cell"><span class="badge badge-success">Active</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-gray-200 flex items-center justify-between">
+                    <div class="text-sm text-gray-600">
+                        <span class="font-medium">142 employees</span> selected for payroll processing
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        Total: <span class="font-semibold text-gray-900">$285,420</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Salary Calculation -->
+        <div x-show="currentStep === 2" class="space-y-6">
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Salary Calculation Summary</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="bg-primary-50 rounded-lg p-4">
+                        <div class="text-sm text-primary-700 mb-1">Gross Salary</div>
+                        <div class="text-2xl font-bold text-primary-900">$320,500</div>
+                    </div>
+                    <div class="bg-error-50 rounded-lg p-4">
+                        <div class="text-sm text-error-700 mb-1">Total Deductions</div>
+                        <div class="text-2xl font-bold text-error-900">$35,080</div>
+                    </div>
+                    <div class="bg-success-50 rounded-lg p-4">
+                        <div class="text-sm text-success-700 mb-1">Net Payable</div>
+                        <div class="text-2xl font-bold text-success-900">$285,420</div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="table-header">Employee</th>
+                                <th class="table-header">Basic Salary</th>
+                                <th class="table-header">Allowances</th>
+                                <th class="table-header">Deductions</th>
+                                <th class="table-header">Net Salary</th>
+                                <th class="table-header">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Mark+Williams&background=6366f1&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Mark Williams</div>
+                                            <div class="text-xs text-gray-500">EMP-001234</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell font-medium">$7,083</td>
+                                <td class="table-cell text-success-600">+$420</td>
+                                <td class="table-cell text-error-600">-$503</td>
+                                <td class="table-cell font-bold text-primary-600">$7,000</td>
+                                <td class="table-cell">
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm">View Details</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Floyd+Miles&background=10b981&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Floyd Miles</div>
+                                            <div class="text-xs text-gray-500">EMP-001235</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell font-medium">$6,250</td>
+                                <td class="table-cell text-success-600">+$350</td>
+                                <td class="table-cell text-error-600">-$450</td>
+                                <td class="table-cell font-bold text-primary-600">$6,150</td>
+                                <td class="table-cell">
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm">View Details</button>
+                                </td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">
+                                    <div class="flex items-center">
+                                        <img src="https://ui-avatars.com/api/?name=Cody+Fisher&background=f59e0b&color=fff" alt="User" class="w-8 h-8 rounded-full mr-3">
+                                        <div>
+                                            <div class="font-medium text-gray-900">Cody Fisher</div>
+                                            <div class="text-xs text-gray-500">EMP-001236</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="table-cell font-medium">$5,417</td>
+                                <td class="table-cell text-success-600">+$300</td>
+                                <td class="table-cell text-error-600">-$367</td>
+                                <td class="table-cell font-bold text-primary-600">$5,350</td>
+                                <td class="table-cell">
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm">View Details</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Deduction Breakdown</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-sm text-gray-600 mb-1">Tax</div>
+                        <div class="text-xl font-bold text-gray-900">$18,500</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-sm text-gray-600 mb-1">Insurance</div>
+                        <div class="text-xl font-bold text-gray-900">$9,250</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-sm text-gray-600 mb-1">Pension</div>
+                        <div class="text-xl font-bold text-gray-900">$5,830</div>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4">
+                        <div class="text-sm text-gray-600 mb-1">Other</div>
+                        <div class="text-xl font-bold text-gray-900">$1,500</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Review & Approve -->
+        <div x-show="currentStep === 3" class="space-y-6">
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Final Review</h3>
+                
+                <div class="bg-warning-50 border border-warning-200 rounded-lg p-4 mb-6">
+                    <div class="flex items-start">
+                        <svg class="w-5 h-5 text-warning-600 mt-0.5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <div>
+                            <div class="font-medium text-warning-900 mb-1">Review Before Processing</div>
+                            <div class="text-sm text-warning-700">Please carefully review all payroll details before proceeding. Once processed, this action cannot be undone.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Payroll Details</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Pay Period:</span>
+                                <span class="font-medium text-gray-900">November 2025</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Payment Date:</span>
+                                <span class="font-medium text-gray-900">December 1, 2025</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Total Employees:</span>
+                                <span class="font-medium text-gray-900">142</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Payment Method:</span>
+                                <span class="font-medium text-gray-900">Bank Transfer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-3">Financial Summary</h4>
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Gross Salary:</span>
+                                <span class="font-medium text-gray-900">$320,500</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Total Allowances:</span>
+                                <span class="font-medium text-success-600">+$12,840</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-gray-600">Total Deductions:</span>
+                                <span class="font-medium text-error-600">-$35,080</span>
+                            </div>
+                            <div class="flex justify-between text-sm pt-2 border-t border-gray-200">
+                                <span class="text-gray-900 font-semibold">Net Payable:</span>
+                                <span class="font-bold text-primary-600">$285,420</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-200 pt-4">
+                    <label class="flex items-start">
+                        <input type="checkbox" required class="rounded border-gray-300 text-primary-600 focus:ring-primary-500 mt-1">
+                        <span class="ml-3 text-sm text-gray-700">
+                            I confirm that I have reviewed all payroll details and authorize the processing of this payroll. I understand that this action will initiate payment to all selected employees.
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Process Payment -->
+        <div x-show="currentStep === 4" class="space-y-6">
+            <div class="card text-center py-12">
+                <div class="w-20 h-20 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-10 h-10 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-2">Payroll Processed Successfully!</h3>
+                <p class="text-gray-600 mb-8">November 2025 payroll has been processed and payments will be initiated shortly.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-8">
+                    <div>
+                        <div class="text-3xl font-bold text-primary-600 mb-1">142</div>
+                        <div class="text-sm text-gray-600">Employees Paid</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-success-600 mb-1">$285,420</div>
+                        <div class="text-sm text-gray-600">Total Amount</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-warning-600 mb-1">Dec 1</div>
+                        <div class="text-sm text-gray-600">Payment Date</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-center space-x-4">
+                    <a href="/pages/payroll/payroll-dashboard.html" class="btn-primary">
+                        Return to Dashboard
+                    </a>
+                    <button class="btn-secondary">
+                        <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Download Report
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center justify-between mt-8">
+            <button @click="currentStep > 1 ? currentStep-- : null" :disabled="currentStep === 1" class="btn-secondary" :class="{ 'opacity-50 cursor-not-allowed': currentStep === 1 }">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                </svg>
+                Previous Step
+            </button>
+
+            <div class="text-sm text-gray-600">
+                Step <span class="font-semibold" x-text="currentStep"></span> of <span x-text="totalSteps"></span>
+            </div>
+
+            <button @click="currentStep < totalSteps ? currentStep++ : null" x-show="currentStep < totalSteps" class="btn-primary">
+                Next Step
+                <svg class="w-5 h-5 inline ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

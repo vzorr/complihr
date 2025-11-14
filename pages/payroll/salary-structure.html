@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Structure - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Salary Structure</h1>
+                <p class="text-gray-600 mt-1">Manage salary components and pay grades</p>
+            </div>
+            <button onclick="openModal('add-component-modal')" class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add Component
+            </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6" x-data="{ activeTab: 'components' }">
+            <div class="flex items-center space-x-4 border-b border-gray-200">
+                <button @click="activeTab = 'components'" 
+                        :class="activeTab === 'components' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Salary Components
+                </button>
+                <button @click="activeTab = 'grades'" 
+                        :class="activeTab === 'grades' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Pay Grades
+                </button>
+                <button @click="activeTab = 'templates'" 
+                        :class="activeTab === 'templates' ? 'text-primary-600 border-b-2 border-primary-600' : 'text-gray-600 hover:text-gray-900'"
+                        class="px-4 py-3 text-sm font-medium">
+                    Salary Templates
+                </button>
+            </div>
+
+            <!-- Salary Components Tab -->
+            <div x-show="activeTab === 'components'" class="mt-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Earnings Components -->
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Earnings</h3>
+                            <span class="badge badge-success">8 Active</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-success-50 rounded-lg border border-success-200">
+                                <div>
+                                    <div class="font-medium text-gray-900">Basic Salary</div>
+                                    <div class="text-xs text-gray-500 mt-1">Fixed component • Taxable</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-primary">Fixed</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">House Rent Allowance (HRA)</div>
+                                    <div class="text-xs text-gray-500 mt-1">40% of Basic • Partially taxable</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge bg-purple-100 text-purple-700">Variable</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Transport Allowance</div>
+                                    <div class="text-xs text-gray-500 mt-1">Fixed amount • Non-taxable up to $200</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-primary">Fixed</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Medical Allowance</div>
+                                    <div class="text-xs text-gray-500 mt-1">Monthly • Non-taxable</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-primary">Fixed</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Performance Bonus</div>
+                                    <div class="text-xs text-gray-500 mt-1">Quarterly • Taxable</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge bg-purple-100 text-purple-700">Variable</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deduction Components -->
+                    <div class="card">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold text-gray-900">Deductions</h3>
+                            <span class="badge badge-error">5 Active</span>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-4 bg-error-50 rounded-lg border border-error-200">
+                                <div>
+                                    <div class="font-medium text-gray-900">Income Tax</div>
+                                    <div class="text-xs text-gray-500 mt-1">Progressive rate • Mandatory</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-error">Mandatory</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Social Security</div>
+                                    <div class="text-xs text-gray-500 mt-1">6.2% of gross • Mandatory</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-error">Mandatory</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Health Insurance</div>
+                                    <div class="text-xs text-gray-500 mt-1">Employee contribution • Optional</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-warning">Optional</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">401(k) Contribution</div>
+                                    <div class="text-xs text-gray-500 mt-1">Up to 15% • Optional</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-warning">Optional</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div>
+                                    <div class="font-medium text-gray-900">Professional Tax</div>
+                                    <div class="text-xs text-gray-500 mt-1">State-specific • Mandatory</div>
+                                </div>
+                                <div class="flex items-center space-x-2">
+                                    <span class="badge badge-error">Mandatory</span>
+                                    <button class="text-gray-600 hover:text-gray-700">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pay Grades Tab -->
+            <div x-show="activeTab === 'grades'" class="mt-6">
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Pay Grade Structure</h3>
+                        <button class="btn-primary btn-sm">Add Pay Grade</button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="table-header">Grade Level</th>
+                                    <th class="table-header">Title</th>
+                                    <th class="table-header">Min Salary</th>
+                                    <th class="table-header">Max Salary</th>
+                                    <th class="table-header">Employees</th>
+                                    <th class="table-header">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <span class="badge badge-primary">Grade 1</span>
+                                    </td>
+                                    <td class="table-cell font-medium">Entry Level</td>
+                                    <td class="table-cell">$30,000</td>
+                                    <td class="table-cell">$45,000</td>
+                                    <td class="table-cell">28</td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-primary-600 hover:text-primary-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <span class="badge badge-primary">Grade 2</span>
+                                    </td>
+                                    <td class="table-cell font-medium">Junior Professional</td>
+                                    <td class="table-cell">$45,000</td>
+                                    <td class="table-cell">$65,000</td>
+                                    <td class="table-cell">42</td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-primary-600 hover:text-primary-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <span class="badge badge-primary">Grade 3</span>
+                                    </td>
+                                    <td class="table-cell font-medium">Senior Professional</td>
+                                    <td class="table-cell">$65,000</td>
+                                    <td class="table-cell">$90,000</td>
+                                    <td class="table-cell">38</td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-primary-600 hover:text-primary-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <span class="badge badge-primary">Grade 4</span>
+                                    </td>
+                                    <td class="table-cell font-medium">Management</td>
+                                    <td class="table-cell">$90,000</td>
+                                    <td class="table-cell">$120,000</td>
+                                    <td class="table-cell">24</td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-primary-600 hover:text-primary-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr class="table-row">
+                                    <td class="table-cell">
+                                        <span class="badge badge-primary">Grade 5</span>
+                                    </td>
+                                    <td class="table-cell font-medium">Senior Management</td>
+                                    <td class="table-cell">$120,000</td>
+                                    <td class="table-cell">$180,000</td>
+                                    <td class="table-cell">13</td>
+                                    <td class="table-cell">
+                                        <div class="flex items-center space-x-2">
+                                            <button class="text-primary-600 hover:text-primary-700">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salary Templates Tab -->
+            <div x-show="activeTab === 'templates'" class="mt-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card hover:shadow-lg transition-shadow cursor-pointer">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-1">Entry Level Template</h4>
+                            <p class="text-xs text-gray-500 mb-3">For new hires and junior positions</p>
+                            <div class="text-2xl font-bold text-primary-600 mb-2">$35,000 - $45,000</div>
+                            <span class="badge badge-success">12 Employees</span>
+                        </div>
+                        <button class="btn-primary w-full btn-sm">Apply Template</button>
+                    </div>
+
+                    <div class="card hover:shadow-lg transition-shadow cursor-pointer">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 bg-success-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-1">Professional Template</h4>
+                            <p class="text-xs text-gray-500 mb-3">For experienced professionals</p>
+                            <div class="text-2xl font-bold text-success-600 mb-2">$65,000 - $90,000</div>
+                            <span class="badge badge-success">28 Employees</span>
+                        </div>
+                        <button class="btn-primary w-full btn-sm">Apply Template</button>
+                    </div>
+
+                    <div class="card hover:shadow-lg transition-shadow cursor-pointer">
+                        <div class="text-center mb-4">
+                            <div class="w-16 h-16 bg-warning-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <svg class="w-8 h-8 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                                </svg>
+                            </div>
+                            <h4 class="font-semibold text-gray-900 mb-1">Management Template</h4>
+                            <p class="text-xs text-gray-500 mb-3">For management positions</p>
+                            <div class="text-2xl font-bold text-warning-600 mb-2">$90,000 - $150,000</div>
+                            <span class="badge badge-success">8 Employees</span>
+                        </div>
+                        <button class="btn-primary w-full btn-sm">Apply Template</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Component Modal -->
+    <div id="add-component-modal" class="modal hidden">
+        <div class="modal-overlay" onclick="closeModal('add-component-modal')">
+            <div class="modal-content max-w-xl" onclick="event.stopPropagation()">
+                <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-gray-900">Add Salary Component</h2>
+                    <button onclick="closeModal('add-component-modal')" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="px-6 py-6">
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Component Name</label>
+                            <input type="text" class="form-input" placeholder="e.g., Overtime Allowance" required>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Component Type</label>
+                            <select class="form-input" required>
+                                <option value="">Select type</option>
+                                <option>Earning</option>
+                                <option>Deduction</option>
+                            </select>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Calculation Type</label>
+                                <select class="form-input" required>
+                                    <option value="">Select method</option>
+                                    <option>Fixed Amount</option>
+                                    <option>Percentage of Basic</option>
+                                    <option>Percentage of Gross</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Value</label>
+                                <input type="number" class="form-input" placeholder="0" required>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tax Treatment</label>
+                            <select class="form-input">
+                                <option>Taxable</option>
+                                <option>Non-Taxable</option>
+                                <option>Partially Taxable</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="flex items-center">
+                                <input type="checkbox" class="rounded border-gray-300 text-primary-600 focus:ring-primary-500">
+                                <span class="ml-2 text-sm text-gray-700">Mandatory component</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="px-6 py-4 border-t border-gray-200 flex items-center justify-end space-x-3">
+                    <button onclick="closeModal('add-component-modal')" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Component</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

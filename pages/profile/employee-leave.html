@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Leave - CompliHR</title>
+    <link rel="stylesheet" href="/css/input.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 font-sans" x-data="{ showRequestModal: false, activeTab: 'requests' }">
+    <!-- Sidebar -->
+    <div id="sidebar-container"></div>
+
+    <!-- Header -->
+    <div id="header-container"></div>
+
+    <!-- Main Content -->
+    <main class="ml-64 pt-16 p-8">
+        <!-- Page Header -->
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">My Leave</h1>
+                <p class="text-gray-600 mt-1">Manage your leave requests and view balances</p>
+            </div>
+            <button @click="showRequestModal = true" class="btn-primary">
+                <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                </svg>
+                Request Leave
+            </button>
+        </div>
+
+        <!-- Leave Balance Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Annual Leave</h3>
+                <div class="flex items-baseline mb-2">
+                    <p class="text-3xl font-bold text-gray-900">15</p>
+                    <span class="ml-2 text-sm text-gray-600">days left</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-primary-500 rounded-full" style="width: 75%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">5 of 20 days used</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-success-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-success-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Sick Leave</h3>
+                <div class="flex items-baseline mb-2">
+                    <p class="text-3xl font-bold text-gray-900">8</p>
+                    <span class="ml-2 text-sm text-gray-600">days left</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-success-500 rounded-full" style="width: 80%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">2 of 10 days used</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-warning-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-warning-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Personal Leave</h3>
+                <div class="flex items-baseline mb-2">
+                    <p class="text-3xl font-bold text-gray-900">3</p>
+                    <span class="ml-2 text-sm text-gray-600">days left</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-warning-500 rounded-full" style="width: 60%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">2 of 5 days used</p>
+            </div>
+
+            <div class="card">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="w-12 h-12 bg-error-100 rounded-lg flex items-center justify-center">
+                        <svg class="w-6 h-6 text-error-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <h3 class="text-sm text-gray-700 mb-1">Emergency Leave</h3>
+                <div class="flex items-baseline mb-2">
+                    <p class="text-3xl font-bold text-gray-900">3</p>
+                    <span class="ml-2 text-sm text-gray-600">days left</span>
+                </div>
+                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="h-full bg-error-500 rounded-full" style="width: 100%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-2">0 of 3 days used</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="mb-6">
+            <div class="border-b border-gray-200">
+                <nav class="-mb-px flex space-x-8">
+                    <button 
+                        @click="activeTab = 'requests'"
+                        :class="activeTab === 'requests' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                        My Requests
+                    </button>
+                    <button 
+                        @click="activeTab = 'calendar'"
+                        :class="activeTab === 'calendar' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                        Leave Calendar
+                    </button>
+                    <button 
+                        @click="activeTab = 'history'"
+                        :class="activeTab === 'history' ? 'border-primary-500 text-primary-600' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'"
+                        class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors">
+                        History
+                    </button>
+                </nav>
+            </div>
+        </div>
+
+        <!-- My Requests Tab -->
+        <div x-show="activeTab === 'requests'">
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Leave Requests</h3>
+                
+                <div class="space-y-4">
+                    <!-- Pending Request -->
+                    <div class="p-4 border border-warning-200 bg-warning-50 rounded-lg">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-sm font-semibold text-gray-900">Annual Leave</h4>
+                                    <span class="badge badge-warning">Pending</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <p class="text-gray-600">Start Date</p>
+                                        <p class="font-medium text-gray-900">Dec 20, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">End Date</p>
+                                        <p class="font-medium text-gray-900">Dec 27, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Duration</p>
+                                        <p class="font-medium text-gray-900">6 days</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Applied On</p>
+                                        <p class="font-medium text-gray-900">Nov 15, 2025</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <p class="text-xs text-gray-600 mb-1">Reason:</p>
+                                    <p class="text-sm text-gray-900">Family vacation during holidays</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between pt-3 border-t border-warning-200">
+                            <p class="text-xs text-gray-600">Waiting for manager approval</p>
+                            <button class="text-error-600 hover:text-error-700 text-sm font-medium">
+                                Cancel Request
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Approved Request -->
+                    <div class="p-4 border border-success-200 bg-success-50 rounded-lg">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-sm font-semibold text-gray-900">Sick Leave</h4>
+                                    <span class="badge badge-success">Approved</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <p class="text-gray-600">Start Date</p>
+                                        <p class="font-medium text-gray-900">Nov 12, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">End Date</p>
+                                        <p class="font-medium text-gray-900">Nov 13, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Duration</p>
+                                        <p class="font-medium text-gray-900">2 days</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Applied On</p>
+                                        <p class="font-medium text-gray-900">Nov 11, 2025</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-gray-600 mb-1">Reason:</p>
+                                    <p class="text-sm text-gray-900">Medical appointment and recovery</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-success-200">
+                            <div class="flex items-center text-xs text-gray-600">
+                                <svg class="w-4 h-4 text-success-600 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Approved by Sarah Johnson on Nov 11, 2025
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rejected Request -->
+                    <div class="p-4 border border-gray-200 bg-gray-50 rounded-lg">
+                        <div class="flex items-start justify-between">
+                            <div class="flex-1">
+                                <div class="flex items-center space-x-3 mb-2">
+                                    <h4 class="text-sm font-semibold text-gray-900">Annual Leave</h4>
+                                    <span class="badge badge-error">Rejected</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 text-sm mb-3">
+                                    <div>
+                                        <p class="text-gray-600">Start Date</p>
+                                        <p class="font-medium text-gray-900">Nov 25, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">End Date</p>
+                                        <p class="font-medium text-gray-900">Nov 26, 2025</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Duration</p>
+                                        <p class="font-medium text-gray-900">2 days</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-gray-600">Applied On</p>
+                                        <p class="font-medium text-gray-900">Nov 10, 2025</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-gray-200">
+                            <p class="text-xs text-gray-600 mb-1">Rejection Reason:</p>
+                            <p class="text-sm text-error-700">Too close to Thanksgiving holiday period. Please select different dates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Leave Calendar Tab -->
+        <div x-show="activeTab === 'calendar'">
+            <div class="card">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900">Leave Calendar - November 2025</h3>
+                    <div class="flex items-center space-x-2">
+                        <button class="p-2 hover:bg-gray-100 rounded">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                            </svg>
+                        </button>
+                        <button class="p-2 hover:bg-gray-100 rounded">
+                            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="grid grid-cols-7 gap-2">
+                    <!-- Days of week -->
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Sun</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Mon</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Tue</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Wed</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Thu</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Fri</div>
+                    <div class="text-center text-sm font-semibold text-gray-700 py-2">Sat</div>
+                    
+                    <!-- Days -->
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50"></div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50"></div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50"></div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">1</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50 bg-gray-100">
+                        <span class="text-sm font-medium">2</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50 bg-gray-100">
+                        <span class="text-sm font-medium">3</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">4</span>
+                    </div>
+                    <!-- Continue with more days... -->
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">5</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">6</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">7</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">8</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50 bg-gray-100">
+                        <span class="text-sm font-medium">9</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50 bg-gray-100">
+                        <span class="text-sm font-medium">10</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-gray-200 rounded hover:bg-gray-50">
+                        <span class="text-sm font-medium">11</span>
+                    </div>
+                    <div class="aspect-square p-2 border border-success-300 rounded bg-success-100">
+                        <span class="text-sm font-medium text-success-700">12</span>
+                        <p class="text-xs text-success-600 mt-1">Sick</p>
+                    </div>
+                    <div class="aspect-square p-2 border border-success-300 rounded bg-success-100">
+                        <span class="text-sm font-medium text-success-700">13</span>
+                        <p class="text-xs text-success-600 mt-1">Sick</p>
+                    </div>
+                </div>
+
+                <!-- Legend -->
+                <div class="mt-6 pt-6 border-t border-gray-200 flex items-center space-x-6">
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-success-100 border border-success-300 rounded mr-2"></div>
+                        <span class="text-sm text-gray-700">Approved Leave</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-warning-100 border border-warning-300 rounded mr-2"></div>
+                        <span class="text-sm text-gray-700">Pending Leave</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-4 bg-gray-100 border border-gray-300 rounded mr-2"></div>
+                        <span class="text-sm text-gray-700">Weekend/Holiday</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- History Tab -->
+        <div x-show="activeTab === 'history'">
+            <div class="card">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">Leave History (2025)</h3>
+                
+                <div class="table-container">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="table-header">Leave Type</th>
+                                <th class="table-header">Start Date</th>
+                                <th class="table-header">End Date</th>
+                                <th class="table-header">Days</th>
+                                <th class="table-header">Status</th>
+                                <th class="table-header">Applied On</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            <tr class="table-row">
+                                <td class="table-cell">Sick Leave</td>
+                                <td class="table-cell">Nov 12, 2025</td>
+                                <td class="table-cell">Nov 13, 2025</td>
+                                <td class="table-cell">2</td>
+                                <td class="table-cell">
+                                    <span class="badge badge-success">Approved</span>
+                                </td>
+                                <td class="table-cell">Nov 11, 2025</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">Annual Leave</td>
+                                <td class="table-cell">Nov 25, 2025</td>
+                                <td class="table-cell">Nov 26, 2025</td>
+                                <td class="table-cell">2</td>
+                                <td class="table-cell">
+                                    <span class="badge badge-error">Rejected</span>
+                                </td>
+                                <td class="table-cell">Nov 10, 2025</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">Personal Leave</td>
+                                <td class="table-cell">Oct 15, 2025</td>
+                                <td class="table-cell">Oct 15, 2025</td>
+                                <td class="table-cell">1</td>
+                                <td class="table-cell">
+                                    <span class="badge badge-success">Approved</span>
+                                </td>
+                                <td class="table-cell">Oct 10, 2025</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">Annual Leave</td>
+                                <td class="table-cell">Aug 5, 2025</td>
+                                <td class="table-cell">Aug 9, 2025</td>
+                                <td class="table-cell">5</td>
+                                <td class="table-cell">
+                                    <span class="badge badge-success">Approved</span>
+                                </td>
+                                <td class="table-cell">Jul 15, 2025</td>
+                            </tr>
+                            <tr class="table-row">
+                                <td class="table-cell">Personal Leave</td>
+                                <td class="table-cell">Jun 20, 2025</td>
+                                <td class="table-cell">Jun 20, 2025</td>
+                                <td class="table-cell">1</td>
+                                <td class="table-cell">
+                                    <span class="badge badge-success">Approved</span>
+                                </td>
+                                <td class="table-cell">Jun 15, 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Request Leave Modal -->
+    <div x-show="showRequestModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center" x-cloak>
+        <div @click.away="showRequestModal = false" class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-xl font-semibold text-gray-900">Request Leave</h3>
+                    <button @click="showRequestModal = false" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-6">
+                <form class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Leave Type *</label>
+                        <select class="form-input">
+                            <option>Select leave type</option>
+                            <option>Annual Leave (15 days available)</option>
+                            <option>Sick Leave (8 days available)</option>
+                            <option>Personal Leave (3 days available)</option>
+                            <option>Emergency Leave (3 days available)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Start Date *</label>
+                            <input type="date" class="form-input">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">End Date *</label>
+                            <input type="date" class="form-input">
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                        <p class="text-sm text-blue-900 font-medium">Total Days: 5 working days</p>
+                        <p class="text-xs text-blue-700 mt-1">Weekends are excluded from calculation</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Reason *</label>
+                        <textarea rows="4" class="form-input" placeholder="Please provide a reason for your leave request"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Supporting Documents (Optional)</label>
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                            <svg class="w-10 h-10 text-gray-400 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-sm text-gray-600">Drop files here or click to upload</p>
+                            <p class="text-xs text-gray-500 mt-1">PDF, JPG, PNG (Max 5MB)</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
+                        <button type="button" @click="showRequestModal = false" class="btn-secondary">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                            </svg>
+                            Submit Request
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../../js/main.js"></script>
+</body>
+</html>
