@@ -14,6 +14,7 @@ import { UsersModule } from './admin/users.module';
 import { LeaveModule } from './leave/leave.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { ExpensesModule } from './expenses/expenses.module';
+import { DocumentsModule } from './documents/documents.module';
 import { CommonModule } from './common/common.module';
 
 @Module({
@@ -58,6 +59,7 @@ import { CommonModule } from './common/common.module';
     LeaveModule,
     AttendanceModule,
     ExpensesModule,
+    DocumentsModule,
   ],
   controllers: [HealthController],
   providers: [
