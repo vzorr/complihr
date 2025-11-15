@@ -4,6 +4,8 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { RolesService } from './roles.service';
 import { RolesController } from './roles.controller';
+import { PermissionsService } from './permissions.service';
+import { PermissionsController } from './permissions.controller';
 import { OrganizationSettingsService } from './organization-settings.service';
 import { OrganizationSettingsController } from './organization-settings.controller';
 import { User } from './entities/user.entity';
@@ -20,9 +22,20 @@ import { AuthModule } from '../auth/auth.module';
   controllers: [
     UsersController,
     RolesController,
+    PermissionsController,
     OrganizationSettingsController,
   ],
-  providers: [UsersService, RolesService, OrganizationSettingsService],
-  exports: [UsersService, RolesService, OrganizationSettingsService],
+  providers: [
+    UsersService,
+    RolesService,
+    PermissionsService,
+    OrganizationSettingsService,
+  ],
+  exports: [
+    UsersService,
+    RolesService,
+    PermissionsService,
+    OrganizationSettingsService,
+  ],
 })
 export class UsersModule {}
