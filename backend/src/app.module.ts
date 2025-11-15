@@ -11,6 +11,7 @@ import { DepartmentsModule } from './departments/departments.module';
 import { DesignationsModule } from './designations/designations.module';
 import { PayrollModule } from './payroll/payroll.module';
 import { UsersModule } from './admin/users.module';
+import { LeaveModule } from './leave/leave.module';
 import { CommonModule } from './common/common.module';
 
 @Module({
@@ -52,6 +53,7 @@ import { CommonModule } from './common/common.module';
     DesignationsModule,
     PayrollModule,
     UsersModule,
+    LeaveModule,
   ],
   controllers: [HealthController],
   providers: [
