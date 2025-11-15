@@ -2,14 +2,27 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
+import { RolesService } from './roles.service';
+import { RolesController } from './roles.controller';
+import { OrganizationSettingsService } from './organization-settings.service';
+import { OrganizationSettingsController } from './organization-settings.controller';
 import { User } from './entities/user.entity';
 import { Role } from './entities/role.entity';
+import { Permission } from './entities/permission.entity';
+import { OrganizationSettings } from './entities/organization-settings.entity';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User, Role]), AuthModule],
-  controllers: [UsersController],
-  providers: [UsersService],
-  exports: [UsersService],
+  imports: [
+    TypeOrmModule.forFeature([User, Role, Permission, OrganizationSettings]),
+    AuthModule,
+  ],
+  controllers: [
+    UsersController,
+    RolesController,
+    OrganizationSettingsController,
+  ],
+  providers: [UsersService, RolesService, OrganizationSettingsService],
+  exports: [UsersService, RolesService, OrganizationSettingsService],
 })
 export class UsersModule {}
