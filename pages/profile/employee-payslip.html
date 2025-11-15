@@ -428,5 +428,36 @@
 
     <!-- Scripts -->
     <script src="../../js/main.js"></script>
+    <script>
+    // Update payslip based on user role
+    document.addEventListener('DOMContentLoaded', () => {
+      const userRole = localStorage.getItem('userRole');
+
+      if (userRole === 'employee') {
+        // Employee data: Zain
+        const employeeData = {
+          fullName: 'Zain',
+          employeeId: 'EMP-105',
+          department: 'Engineering',
+          position: 'Senior Developer'
+        };
+
+        // Update employee name
+        const nameElement = document.querySelector('.text-gray-900.font-medium');
+        if (nameElement && nameElement.textContent === 'Robert Allen') {
+          nameElement.textContent = employeeData.fullName;
+        }
+
+        // Update employee details
+        const detailsDiv = nameElement?.parentElement;
+        if (detailsDiv) {
+          const details = detailsDiv.querySelectorAll('p.text-gray-600');
+          if (details[0]) details[0].textContent = `Employee ID: ${employeeData.employeeId}`;
+          if (details[1]) details[1].textContent = `Department: ${employeeData.department}`;
+          if (details[2]) details[2].textContent = `Position: ${employeeData.position}`;
+        }
+      }
+    });
+    </script>
 </body>
 </html>

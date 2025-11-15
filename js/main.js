@@ -18,14 +18,24 @@ async function loadComponent(elementId, componentPath) {
 document.addEventListener('DOMContentLoaded', () => {
   // Load components if containers exist
   if (document.getElementById('sidebar-container')) {
-    loadComponent('sidebar-container', '/components/sidebar.html').then(() => {
+    // Determine which sidebar to load based on user role or current page
+    const currentPath = window.location.pathname;
+    let sidebarPath = '/components/sidebar-admin.html'; // Default to admin
+
+    // Check if user is on employee dashboard or came from employee login
+    const userRole = localStorage.getItem('userRole'); // Can be set during login
+    if (userRole === 'employee' || currentPath.includes('employee-dashboard')) {
+      sidebarPath = '/components/sidebar-employee.html';
+    }
+
+    loadComponent('sidebar-container', sidebarPath).then(() => {
       initializeSidebar();
     });
   }
   if (document.getElementById('header-container')) {
     loadComponent('header-container', '/components/header.html');
   }
-  
+
   // Set active nav item based on current page
   setTimeout(() => {
     setActiveNavItem();
@@ -129,7 +139,14 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Logout function
+function logout() {
+  localStorage.removeItem('userRole');
+  window.location.href = '/index.html';
+}
+
 // Export functions for use in pages
 window.loadComponent = loadComponent;
 window.openModal = openModal;
 window.closeModal = closeModal;
+window.logout = logout;

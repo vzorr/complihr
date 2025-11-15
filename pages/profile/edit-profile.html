@@ -222,5 +222,68 @@
 
     <!-- Scripts -->
     <script src="/js/main.js"></script>
+    <script>
+    // Update edit profile form based on user role
+    document.addEventListener('DOMContentLoaded', () => {
+      const userRole = localStorage.getItem('userRole');
+
+      if (userRole === 'employee') {
+        // Employee data: Zain
+        const employeeData = {
+          firstName: 'Zain',
+          lastName: '',
+          email: 'zain@complihr.com',
+          phone: '+1 (555) 234-5678',
+          dob: '1992-05-20',
+          gender: 'male',
+          maritalStatus: 'single',
+          nationality: 'American',
+          address1: '456 Park Avenue',
+          address2: 'Apt 12B',
+          city: 'Brooklyn',
+          state: 'New York',
+          zip: '11201',
+          emergencyName: 'Ahmad Khan',
+          emergencyRelation: 'Brother',
+          emergencyPhone: '+1 (555) 876-5432',
+          emergencyEmail: 'ahmad.khan@email.com',
+          employeeId: 'EMP-105',
+          jobTitle: 'Senior Developer',
+          department: 'Engineering',
+          joiningDate: '2023-03-01',
+          workLocation: 'New York Office',
+          employmentType: 'Full-Time'
+        };
+
+        // Update form fields
+        const form = document.querySelector('form');
+        if (form) {
+          form.querySelector('input[value="Robert"]').value = employeeData.firstName;
+          form.querySelector('input[value="Allen"]').value = employeeData.lastName;
+          form.querySelector('input[value="robert.allen@complihr.com"]').value = employeeData.email;
+          form.querySelector('input[value="+1 (555) 123-4567"]').value = employeeData.phone;
+          form.querySelector('input[value="1985-06-15"]').value = employeeData.dob;
+          form.querySelector('select').value = employeeData.gender;
+          form.querySelectorAll('select')[1].value = employeeData.maritalStatus;
+          form.querySelector('input[value="American"]').value = employeeData.nationality;
+          form.querySelector('input[value="123 Main Street"]').value = employeeData.address1;
+          form.querySelector('input[value="Apt 4B"]').value = employeeData.address2;
+          form.querySelector('input[value="New York"]').value = employeeData.city;
+          form.querySelectorAll('input[value="New York"]')[1].value = employeeData.state;
+          form.querySelector('input[value="10001"]').value = employeeData.zip;
+          form.querySelector('input[value="Jane Allen"]').value = employeeData.emergencyName;
+          form.querySelector('input[value="Spouse"]').value = employeeData.emergencyRelation;
+          form.querySelector('input[value="+1 (555) 987-6543"]').value = employeeData.emergencyPhone;
+          form.querySelector('input[value="jane.allen@email.com"]').value = employeeData.emergencyEmail;
+          form.querySelector('input[value="EMP-001"]').value = employeeData.employeeId;
+          form.querySelector('input[value="HR Manager"]').value = employeeData.jobTitle;
+          form.querySelector('input[value="Human Resources"]').value = employeeData.department;
+          form.querySelector('input[value="2020-01-15"]').value = employeeData.joiningDate;
+          form.querySelector('input[value="New York Office"]').value = employeeData.workLocation;
+          form.querySelector('input[value="Full-Time"]').value = employeeData.employmentType;
+        }
+      }
+    });
+    </script>
 </body>
 </html>

@@ -455,5 +455,111 @@
 
     <!-- Scripts -->
     <script src="../../js/main.js"></script>
+    <script>
+    // Update profile based on user role
+    document.addEventListener('DOMContentLoaded', () => {
+      const userRole = localStorage.getItem('userRole');
+
+      if (userRole === 'employee') {
+        // Employee data: Zain
+        const employeeData = {
+          fullName: 'Zain',
+          position: 'Software Developer',
+          department: 'Engineering',
+          employeeId: 'EMP-105',
+          joiningDate: 'March 1, 2023',
+          workLocation: 'New York Office',
+          email: 'zain@complihr.com',
+          phone: '+1 (555) 234-5678',
+          address: '456 Park Avenue<br>Brooklyn, NY 11201<br>United States',
+          dob: 'May 20, 1992',
+          gender: 'Male',
+          nationality: 'American',
+          maritalStatus: 'Single',
+          emergencyName: 'Ahmad Khan',
+          emergencyRelation: 'Brother',
+          emergencyPhone: '+1 (555) 876-5432',
+          emergencyEmail: 'ahmad.khan@email.com',
+          bankName: 'Bank of America',
+          designation: 'Senior Developer',
+          yearsOfService: '2 years',
+          reportsTo: 'Sarah Johnson (Engineering Manager)',
+          salary: '$95,000',
+          annualLeave: '12 days',
+          sickLeave: '5 days',
+          leaveUsed: '3 days'
+        };
+
+        // Update all h2 and p elements with "Robert Allen"
+        document.querySelectorAll('h2, p').forEach(el => {
+          if (el.textContent.trim() === 'Robert Allen') {
+            el.textContent = employeeData.fullName;
+          }
+        });
+
+        // Update profile image
+        const profileImg = document.querySelector('img[alt="Profile"]');
+        if (profileImg) profileImg.src = 'https://ui-avatars.com/api/?name=Zain&background=6366f1&color=fff&size=400';
+
+        // Update position and department
+        const positionEl = document.querySelector('p.text-gray-600.mb-4');
+        if (positionEl && positionEl.textContent.includes('HR Manager')) {
+          positionEl.textContent = `${employeeData.position} • ${employeeData.department}`;
+        }
+
+        // Update header quick stats section
+        const detailSections = document.querySelectorAll('.grid.grid-cols-3 > div');
+        if (detailSections.length >= 3) {
+          const empIdEl = detailSections[0].querySelector('p.text-sm.font-medium');
+          const joinDateEl = detailSections[1].querySelector('p.text-sm.font-medium');
+          const locationEl = detailSections[2].querySelector('p.text-sm.font-medium');
+          if (empIdEl) empIdEl.textContent = employeeData.employeeId;
+          if (joinDateEl) joinDateEl.textContent = employeeData.joiningDate;
+          if (locationEl) locationEl.textContent = employeeData.workLocation;
+        }
+
+        // Update Basic Information section
+        setTimeout(() => {
+          const allTextElements = document.querySelectorAll('p.text-sm.font-medium.text-gray-900');
+          allTextElements.forEach(el => {
+            const text = el.textContent.trim();
+            if (text === 'Robert Allen') el.textContent = employeeData.fullName;
+            else if (text === 'January 15, 1985') el.textContent = employeeData.dob;
+            else if (text === 'Married') el.textContent = employeeData.maritalStatus;
+          });
+
+          // Update Contact Information
+          const emailEl = Array.from(allTextElements).find(el => el.textContent === 'robert@complihr.com');
+          if (emailEl) emailEl.textContent = employeeData.email;
+
+          const phoneEl = Array.from(allTextElements).find(el => el.textContent === '+1 (555) 123-4567');
+          if (phoneEl) phoneEl.textContent = employeeData.phone;
+
+          const addressEl = Array.from(allTextElements).find(el => el.innerHTML.includes('123 Main Street'));
+          if (addressEl) addressEl.innerHTML = employeeData.address;
+
+          // Update Emergency Contact
+          const emergencyEls = Array.from(allTextElements);
+          emergencyEls.forEach(el => {
+            if (el.textContent === 'Sarah Allen') el.textContent = employeeData.emergencyName;
+            else if (el.textContent === 'Spouse') el.textContent = employeeData.emergencyRelation;
+            else if (el.textContent === '+1 (555) 987-6543') el.textContent = employeeData.emergencyPhone;
+            else if (el.textContent === 'sarah.allen@email.com') el.textContent = employeeData.emergencyEmail;
+            else if (el.textContent === 'Chase Bank') el.textContent = employeeData.bankName;
+            else if (el.textContent === 'Human Resources') el.textContent = employeeData.department;
+            else if (el.textContent === 'HR Manager') el.textContent = employeeData.designation;
+            else if (el.textContent === 'EMP-001') el.textContent = employeeData.employeeId;
+            else if (el.textContent === 'January 15, 2020') el.textContent = employeeData.joiningDate;
+            else if (el.textContent === '5 years') el.textContent = employeeData.yearsOfService;
+            else if (el.textContent === 'David Smith (CEO)') el.textContent = employeeData.reportsTo;
+            else if (el.textContent === '$85,000') el.textContent = employeeData.salary;
+            else if (el.textContent === '15 days') el.textContent = employeeData.annualLeave;
+            else if (el.textContent === '8 days') el.textContent = employeeData.sickLeave;
+            else if (el.textContent === '10 days') el.textContent = employeeData.leaveUsed;
+          });
+        }, 100);
+      }
+    });
+    </script>
 </body>
 </html>

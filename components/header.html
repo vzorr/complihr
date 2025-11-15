@@ -5,7 +5,7 @@
   <div class="flex items-center justify-between h-full px-6">
     <!-- Greeting -->
     <div>
-      <h1 class="text-lg font-semibold text-gray-900">Hello Robert</h1>
+      <h1 id="greeting-name" class="text-lg font-semibold text-gray-900">Hello</h1>
       <p class="text-sm text-gray-500">Good Morning</p>
     </div>
 
@@ -65,7 +65,7 @@
               </div>
               <div class="ml-3 flex-1">
                 <p class="text-sm font-medium text-gray-900">New Employee Added</p>
-                <p class="text-sm text-gray-500">John Doe joined the team</p>
+                <p class="text-sm text-gray-500">New team member joined</p>
                 <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
               </div>
             </a>
@@ -96,12 +96,12 @@
 
       <!-- User Profile Dropdown -->
       <div class="relative" x-data="{ open: false }">
-        <button @click="open = !open" 
+        <button @click="open = !open"
                 class="flex items-center space-x-3 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-lg p-1">
-          <img src="https://ui-avatars.com/api/?name=Robert+Allen&background=6366f1&color=fff" 
-               alt="User" 
+          <img id="user-avatar" src="https://ui-avatars.com/api/?name=Robert+Allen&background=6366f1&color=fff"
+               alt="User"
                class="w-8 h-8 rounded-full">
-          <span class="text-sm font-medium text-gray-700">Robert Allen</span>
+          <span id="user-display-name" class="text-sm font-medium text-gray-700">Robert Allen</span>
           <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -119,8 +119,8 @@
              class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
              style="display: none;">
           <div class="px-4 py-3">
-            <p class="text-sm font-medium text-gray-900">Robert Allen</p>
-            <p class="text-sm text-gray-500 truncate">robert@complihr.com</p>
+            <p id="dropdown-name" class="text-sm font-medium text-gray-900">Robert Allen</p>
+            <p id="dropdown-email" class="text-sm text-gray-500 truncate">robert@complihr.com</p>
           </div>
           <div class="py-1">
             <a href="#" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -138,7 +138,7 @@
             </a>
           </div>
           <div class="py-1">
-            <a href="/pages/auth/login.html" class="flex items-center px-4 py-2 text-sm text-error-600 hover:bg-gray-100">
+            <a href="#" onclick="logout(); return false;" class="flex items-center px-4 py-2 text-sm text-error-600 hover:bg-gray-100">
               <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
               </svg>
@@ -150,3 +150,49 @@
     </div>
   </div>
 </header>
+
+<script>
+// Set user info based on role
+(function() {
+  function updateUserInfo() {
+    const userRole = localStorage.getItem('userRole');
+
+    const greetingEl = document.getElementById('greeting-name');
+    const displayNameEl = document.getElementById('user-display-name');
+    const avatarEl = document.getElementById('user-avatar');
+    const dropdownNameEl = document.getElementById('dropdown-name');
+    const dropdownEmailEl = document.getElementById('dropdown-email');
+
+    // Check if all elements exist
+    if (!greetingEl || !displayNameEl || !avatarEl || !dropdownNameEl || !dropdownEmailEl) {
+      // If elements don't exist yet, retry after a short delay
+      setTimeout(updateUserInfo, 50);
+      return;
+    }
+
+    if (userRole === 'employee') {
+      // Employee: Zain
+      greetingEl.textContent = 'Hello Zain';
+      displayNameEl.textContent = 'Zain';
+      avatarEl.src = 'https://ui-avatars.com/api/?name=Zain&background=6366f1&color=fff';
+      dropdownNameEl.textContent = 'Zain';
+      dropdownEmailEl.textContent = 'zain@complihr.com';
+    } else {
+      // Admin: Robert Allen
+      greetingEl.textContent = 'Hello Robert';
+      displayNameEl.textContent = 'Robert Allen';
+      avatarEl.src = 'https://ui-avatars.com/api/?name=Robert+Allen&background=6366f1&color=fff';
+      dropdownNameEl.textContent = 'Robert Allen';
+      dropdownEmailEl.textContent = 'robert@complihr.com';
+    }
+  }
+
+  // Start updating immediately
+  updateUserInfo();
+
+  // Also update when DOM is fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateUserInfo);
+  }
+})();
+</script>

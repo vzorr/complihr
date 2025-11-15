@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CompliHR</title>
+    <title>Admin Login - CompliHR</title>
     <link rel="stylesheet" href="/css/input.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -12,6 +12,16 @@
         <!-- Left Side - Login Form -->
         <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
             <div class="mx-auto w-full max-w-sm lg:w-96">
+                <!-- Back Button -->
+                <div class="mb-4">
+                    <a href="/index.html" class="text-sm text-gray-600 hover:text-gray-900 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+                        </svg>
+                        Back to home
+                    </a>
+                </div>
+
                 <!-- Logo -->
                 <div class="flex items-center">
                     <div class="w-10 h-10 bg-primary-500 rounded-lg flex items-center justify-center">
@@ -22,10 +32,17 @@
 
                 <!-- Heading -->
                 <div class="mt-8">
-                    <h2 class="text-3xl font-bold text-gray-900">Welcome back</h2>
-                    <p class="mt-2 text-sm text-gray-600">
-                        Sign in to your account to continue
-                    </p>
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900">Admin Login</h2>
+                            <p class="text-sm text-gray-600">Access admin dashboard</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Form -->
@@ -34,14 +51,15 @@
                         <!-- Email -->
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700">
-                                Email address
+                                Admin Email
                             </label>
                             <div class="mt-1">
-                                <input id="email" 
-                                       name="email" 
-                                       type="email" 
-                                       autocomplete="email" 
+                                <input id="email"
+                                       name="email"
+                                       type="email"
+                                       autocomplete="email"
                                        required
+                                       placeholder="admin@company.com"
                                        value="robert@complihr.com"
                                        class="form-input">
                             </div>
@@ -53,11 +71,12 @@
                                 Password
                             </label>
                             <div class="mt-1">
-                                <input id="password" 
-                                       name="password" 
-                                       type="password" 
-                                       autocomplete="current-password" 
+                                <input id="password"
+                                       name="password"
+                                       type="password"
+                                       autocomplete="current-password"
                                        required
+                                       placeholder="Enter your password"
                                        value="password123"
                                        class="form-input">
                             </div>
@@ -66,17 +85,17 @@
                         <!-- Remember Me & Forgot Password -->
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <input id="remember-me" 
-                                       name="remember-me" 
+                                <input id="remember-me"
+                                       name="remember-me"
                                        type="checkbox"
-                                       class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                                       class="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded">
                                 <label for="remember-me" class="ml-2 block text-sm text-gray-900">
                                     Remember me
                                 </label>
                             </div>
 
                             <div class="text-sm">
-                                <a href="forgot-password.html" class="font-medium text-primary-600 hover:text-primary-500">
+                                <a href="forgot-password.html" class="font-medium text-purple-600 hover:text-purple-500">
                                     Forgot password?
                                 </a>
                             </div>
@@ -84,8 +103,8 @@
 
                         <!-- Submit Button -->
                         <div>
-                            <button type="submit" class="btn-primary w-full btn-lg">
-                                Sign in
+                            <button type="submit" class="w-full btn-lg" style="background: linear-gradient(to right, rgb(147, 51, 234), rgb(109, 40, 217)); border: none; color: white; padding: 0.75rem 1.5rem; font-weight: 600; border-radius: 0.5rem; cursor: pointer; transition: all 0.2s;">
+                                Sign in to Admin Portal
                             </button>
                         </div>
                     </form>
@@ -125,12 +144,12 @@
                         </div>
                     </div>
 
-                    <!-- Register Link -->
+                    <!-- Help Text -->
                     <div class="mt-6">
                         <p class="text-center text-sm text-gray-600">
-                            Don't have an account?
-                            <a href="register.html" class="font-medium text-primary-600 hover:text-primary-500">
-                                Sign up
+                            Are you an employee?
+                            <a href="/pages/auth/employee-login.html" class="font-medium text-blue-600 hover:text-blue-500">
+                                Login here
                             </a>
                         </p>
                     </div>
@@ -140,38 +159,44 @@
 
         <!-- Right Side - Image/Illustration -->
         <div class="hidden lg:block relative w-0 flex-1">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-600 to-purple-700 flex items-center justify-center p-12">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-purple-800 flex items-center justify-center p-12">
                 <div class="max-w-md">
                     <h1 class="text-4xl font-bold text-white mb-4">
-                        Streamline Your HR Operations
+                        Admin Control Center
                     </h1>
-                    <p class="text-lg text-primary-100 mb-8">
-                        Manage employees, attendance, leave requests, and more - all in one powerful platform.
+                    <p class="text-lg text-purple-100 mb-8">
+                        Manage your entire HR operations from a unified, powerful dashboard.
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-start">
-                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-purple-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="ml-3 text-primary-100">Easy employee management</span>
+                            <span class="ml-3 text-purple-100">Complete employee management</span>
                         </div>
                         <div class="flex items-start">
-                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-purple-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="ml-3 text-primary-100">Real-time attendance tracking</span>
+                            <span class="ml-3 text-purple-100">Automated payroll processing</span>
                         </div>
                         <div class="flex items-start">
-                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-purple-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="ml-3 text-primary-100">Automated payroll processing</span>
+                            <span class="ml-3 text-purple-100">Advanced reporting and analytics</span>
                         </div>
                         <div class="flex items-start">
-                            <svg class="w-6 h-6 text-primary-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-6 h-6 text-purple-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                             </svg>
-                            <span class="ml-3 text-primary-100">Comprehensive reporting</span>
+                            <span class="ml-3 text-purple-100">Leave and expense approvals</span>
+                        </div>
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-purple-200 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                            </svg>
+                            <span class="ml-3 text-purple-100">System configuration and settings</span>
                         </div>
                     </div>
                 </div>
