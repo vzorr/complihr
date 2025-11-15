@@ -17,6 +17,7 @@ import { ExpensesModule } from './expenses/expenses.module';
 import { DocumentsModule } from './documents/documents.module';
 import { PerformanceModule } from './performance/performance.module';
 import { ComplianceModule } from './compliance/compliance.module';
+import { ShiftsModule } from './shifts/shifts.module';
 import { CommonModule } from './common/common.module';
 
 @Module({
@@ -64,6 +65,7 @@ import { CommonModule } from './common/common.module';
     DocumentsModule,
     PerformanceModule,
     ComplianceModule,
+    ShiftsModule,
   ],
   controllers: [HealthController],
   providers: [
